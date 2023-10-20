@@ -1,0 +1,25 @@
+<div class="modal-header bg-primary text-white">
+    <h4 class="modal-title" id="modalLabel">Detalhes do Pedido</h4>
+    <button type="button" class="close text-white" aria-label="Fechar" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-4 font-weight-bold">Id:</div>
+            <div class="col-8">{{ pedido.id }}</div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-4 font-weight-bold">Prazo (Dias):</div>
+            <div class="col-8">{{ pedido.term }}</div>
+        </div>
+        <div class="row">
+            <div class="col-4 font-weight-bold">Valor (R$):</div>
+            <div class="col-8">{{ pedido.amount }}</div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="activeModal.close()">Fechar</button>
+</div>

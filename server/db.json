@@ -1,0 +1,188 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@example.com",
+      "password": "admin123",
+      "profile": "admin"
+    },
+    {
+      "id": 2,
+      "email": "user1@example.com",
+      "password": "user123",
+      "profile": "user"
+    },
+    {
+      "id": 3,
+      "email": "manager@example.com",
+      "password": "manager123",
+      "profile": "manager"
+    },
+    {
+      "id": 5,
+      "email": "cadesignplus@gmail.com",
+      "password": "123456",
+      "profile": "user"
+    },
+    {
+      "id": 6,
+      "email": "eduardofelix41@icloud.com",
+      "password": "123456",
+      "profile": "user"
+    },
+    {
+      "id": 7,
+      "email": "felixsystem@hotmail.com",
+      "password": "123456",
+      "profile": "user"
+    },
+    {
+      "id": 8,
+      "email": "eduardo740031@hotmail.com",
+      "password": "123456",
+      "profile": "user"
+    },
+    {
+      "id": 9,
+      "email": "example@example.com",
+      "password": "123456",
+      "profile": "user"
+    },
+    {
+      "id": 10,
+      "email": "example2@example.com",
+      "password": "123456",
+      "profile": "user"
+    },
+    {
+      "id": 11,
+      "email": "carolinaassunccao@gmail.com",
+      "password": "123456",
+      "profile": "user"
+    },
+    {
+      "id": 12,
+      "email": "eduardofelix@ufpr.br",
+      "password": "123456",
+      "profile": "user"
+    }
+  ],
+  "pedidos": [
+    {
+      "id": 1,
+      "userId": 2,
+      "status": "Em Aberto",
+      "term": 10,
+      "amount": 10,
+      "isPaid": true
+    },
+    {
+      "id": 2,
+      "userId": 2,
+      "status": "Finalizado",
+      "term": 10,
+      "amount": 10,
+      "isPaid": false
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "status": "Em Aberto",
+      "term": 5,
+      "amount": 64.5,
+      "isPaid": false
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "status": "Em Aberto",
+      "term": 5,
+      "amount": 86,
+      "isPaid": false
+    },
+    {
+      "id": 5,
+      "userId": 2,
+      "status": "Em Aberto",
+      "term": 3,
+      "amount": 30,
+      "isPaid": false
+    },
+    {
+      "id": 6,
+      "userId": 2,
+      "status": "Em Aberto",
+      "term": 5,
+      "amount": 134,
+      "isPaid": false
+    },
+    {
+      "id": 7,
+      "userId": 2,
+      "status": "Em Aberto",
+      "term": 5,
+      "amount": 46,
+      "isPaid": false
+    },
+    {
+      "id": 8,
+      "userId": 2,
+      "status": "Em Aberto",
+      "term": 5,
+      "amount": 81.5,
+      "isPaid": false
+    },
+    {
+      "id": 9,
+      "userId": 2,
+      "status": "Em Aberto",
+      "term": 5,
+      "amount": 81.5,
+      "isPaid": false
+    },
+    {
+      "id": 10,
+      "userId": 2,
+      "status": "Em Aberto",
+      "term": 5,
+      "amount": 59.5,
+      "isPaid": false
+    },
+    {
+      "id": 11,
+      "userId": 12,
+      "status": "Em Aberto",
+      "term": 5,
+      "amount": 86,
+      "isPaid": false
+    },
+    {
+      "id": 12,
+      "userId": 12,
+      "status": "Rejeitado",
+      "term": 5,
+      "amount": 70,
+      "isPaid": false
+    }
+  ],
+  "itens": [
+    {
+      "id": 1,
+      "name": "Camisa",
+      "term": 2,
+      "amount": 5.5
+    },
+    {
+      "id": 2,
+      "name": "Calça",
+      "term": 3,
+      "amount": 4.5
+    },
+    {
+      "id": 3,
+      "name": "Lençol",
+      "term": 5,
+      "amount": 11.5
+    }
+  ]
+}
