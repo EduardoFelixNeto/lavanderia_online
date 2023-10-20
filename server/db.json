@@ -1,72 +1,4 @@
 {
-  "users": [
-    {
-      "id": 1,
-      "email": "admin@example.com",
-      "password": "admin123",
-      "profile": "admin"
-    },
-    {
-      "id": 2,
-      "email": "user1@example.com",
-      "password": "user123",
-      "profile": "user"
-    },
-    {
-      "id": 3,
-      "email": "manager@example.com",
-      "password": "manager123",
-      "profile": "manager"
-    },
-    {
-      "id": 5,
-      "email": "cadesignplus@gmail.com",
-      "password": "123456",
-      "profile": "user"
-    },
-    {
-      "id": 6,
-      "email": "eduardofelix41@icloud.com",
-      "password": "123456",
-      "profile": "user"
-    },
-    {
-      "id": 7,
-      "email": "felixsystem@hotmail.com",
-      "password": "123456",
-      "profile": "user"
-    },
-    {
-      "id": 8,
-      "email": "eduardo740031@hotmail.com",
-      "password": "123456",
-      "profile": "user"
-    },
-    {
-      "id": 9,
-      "email": "example@example.com",
-      "password": "123456",
-      "profile": "user"
-    },
-    {
-      "id": 10,
-      "email": "example2@example.com",
-      "password": "123456",
-      "profile": "user"
-    },
-    {
-      "id": 11,
-      "email": "carolinaassunccao@gmail.com",
-      "password": "123456",
-      "profile": "user"
-    },
-    {
-      "id": 12,
-      "email": "eduardofelix@ufpr.br",
-      "password": "123456",
-      "profile": "user"
-    }
-  ],
   "pedidos": [
     {
       "id": 1,
@@ -162,6 +94,14 @@
       "status": "Rejeitado",
       "term": 5,
       "amount": 70,
+      "isPaid": false
+    },
+    {
+      "id": 13,
+      "userId": 3,
+      "status": "Rejeitado",
+      "term": 5,
+      "amount": 74.5,
       "isPaid": false
     }
   ],

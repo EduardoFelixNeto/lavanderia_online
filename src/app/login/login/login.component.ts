@@ -13,29 +13,30 @@ export class LoginComponent {
   user!: User;
   message!: string;
 
-  constructor(private authService: AuthenticationService, private router: Router) {}
+  constructor(private authService: AuthenticationService, private router: Router) { }
 
   onLogin(): void {
-    console.log('Email:', this.email, 'Password:', this.password);
     this.authService.login(this.email, this.password).subscribe(
       (users) => {
-        if (users && users.length > 0) {
-          this.user = users[0];
-          if (this.user.profile == 'user') {
-          this.router.navigate(['/user_homepage']); // 3. Use o método navigate
-          // Aqui você pode redirecionar para uma página inicial ou outra página conforme o perfil.
+        if (users.length > 0) {
+          for (let index = 0; index < users.length; index++) {
+            const em = users[index].email;
+            const pwd = users[index].password;
+            if (this.email == em && this.password == pwd) {
+              this.user = users[index];
+              if (this.user.profile == 'user') {
+                this.router.navigate(['/user_homepage']);
+              }
+            } else {
+              this.message = 'Erro ao fazer login! Verifique suas credenciais.';
+            }
           }
-        } else {
-          this.message = 'Erro ao fazer login! Verifique suas credenciais.';
         }
-      },
-      (err) => {
-        this.message = 'Erro ao fazer login! Verifique suas credenciais.';
       }
     );
   }
-  
+
   onRegister(): void {
     this.router.navigate(['/register']); // 3. Use o método navigate
-    }
+  }
 }
