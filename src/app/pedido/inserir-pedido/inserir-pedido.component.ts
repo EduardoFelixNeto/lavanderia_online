@@ -9,6 +9,7 @@ import { AuthenticationService } from 'src/app/login/services/authentication.ser
 import { User } from 'src/app/shared/models/user.model';
 import { ModalPedidoComponent } from '../modal-pedido/modal-pedido.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { last } from 'rxjs';
 
 @Component({
   selector: 'app-inserir-pedido',
@@ -36,8 +37,19 @@ export class InserirPedidoComponent implements OnInit {
   }
 
   incluirItem(item: Item, quantidade: number) {
-    const linha = new LinhaPedido(item, quantidade);
-    this.linhasPedido.push(linha);
+    console.log(item);
+    this.pedidoService.getLastPedidoId().subscribe(lastId => {
+      const newPedidoId = lastId + 1;
+      const userId = this.currentUser!.id;
+      const linha = new LinhaPedido(newPedidoId,userId!,item.id!,quantidade);
+      linha.totalAmount = item.amount! * quantidade;
+      linha.term = item.term!;
+      console.log(item.term);
+      console.log(linha.term);
+      this.linhasPedido.push(linha);
+      console.log(linha);
+      this.pedidoService.createTransactionLine(linha).subscribe();
+    });
   }
 
   removerLinhaPedido(index: number) {
@@ -49,9 +61,8 @@ export class InserirPedidoComponent implements OnInit {
       this.pedidoService.getLastPedidoId().subscribe(lastId => {
         const newPedidoId = lastId + 1;
         const userId = this.currentUser!.id;
-        const totalAmount = this.linhasPedido.reduce((acc, linha) => acc + linha.total, 0);
-        const maxTerm = Math.max(...this.linhasPedido.map(linha => linha.item.term || 0));
-
+        const totalAmount = this.linhasPedido.reduce((acc, linha) => acc + linha.totalAmount, 0);
+        const maxTerm = Math.max(...this.linhasPedido.map(linha => linha.term || 0));
         const newPedido: Pedido = {
           id: newPedidoId,
           userId: userId,
@@ -71,8 +82,8 @@ export class InserirPedidoComponent implements OnInit {
     this.pedidoService.getLastPedidoId().subscribe(lastId => {
       const newPedidoId = lastId + 1;
       const userId = this.currentUser!.id;
-      const totalAmount = this.linhasPedido.reduce((acc, linha) => acc + linha.total, 0);
-      const maxTerm = Math.max(...this.linhasPedido.map(linha => linha.item.term || 0));
+      const totalAmount = this.linhasPedido.reduce((acc, linha) => acc + linha.totalAmount, 0);
+      const maxTerm = Math.max(...this.linhasPedido.map(linha => linha.term || 0));
 
       const newPedido: Pedido = {
         id: newPedidoId,
@@ -92,9 +103,8 @@ export class InserirPedidoComponent implements OnInit {
       this.pedidoService.getLastPedidoId().subscribe(lastId => {
         const newPedidoId = lastId + 1;
         const userId = this.currentUser!.id;
-        const totalAmount = this.linhasPedido.reduce((acc, linha) => acc + linha.total, 0);
-        const maxTerm = Math.max(...this.linhasPedido.map(linha => linha.item.term || 0));
-
+        const totalAmount = this.linhasPedido.reduce((acc, linha) => acc + linha.totalAmount, 0);
+        const maxTerm = Math.max(...this.linhasPedido.map(linha => linha.term || 0));
         const newPedido: Pedido = {
           id: newPedidoId,
           userId: userId,

@@ -1,13 +1,16 @@
-import { Item } from "./item.model";
-
 export class LinhaPedido {
-    item: Item;
-    quantidade: number;
-    total: number;
+    id!: number;
+    transactionId!: number;
+    userId!: number
+    itemId!: number;
+    quantity: number;
+    term!: number;
+    totalAmount!: number;
   
-    constructor(item: Item, quantidade: number) {
-      this.item = item;
-      this.quantidade = quantidade;
-      this.total = (item.amount || 0) * quantidade;
+    constructor(transactionId: number, userId: number, itemId: number, quantity: number) {
+      this.transactionId = transactionId;
+      this.userId = userId;
+      this.itemId = itemId;
+      this.quantity = quantity;
     }
   }

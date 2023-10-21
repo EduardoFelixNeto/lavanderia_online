@@ -36,9 +36,9 @@
                 <th>Ação</th>
             </tr>
             <tr *ngFor="let linha of linhasPedido; let i = index">
-                <td>{{linha.item.name}}</td>
-                <td>{{linha.quantidade}}</td>
-                <td>{{linha.total}}</td>
+                <td>{{linha.itemId}}</td>
+                <td>{{linha.quantity}}</td>
+                <td>{{linha.totalAmount}}</td>
                 <td>
                     <button (click)="removerLinhaPedido(i)" class="btn btn-xs btn-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i> Remover

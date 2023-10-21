@@ -44,7 +44,7 @@ export class HomeComponent {
 
   ngOnInit(): void {
     if (this.currentUser && this.currentUser.id) {
-      this.pedidoService.listByUserIdAndStatus(this.currentUser.id, 'Em Aberto').subscribe(data => {
+      this.pedidoService.listByUserIdAndStatus(this.currentUser.id,encodeURIComponent("Em Aberto")).subscribe(data => {
         this.pedidos = data;
       }, error => {
         // Você pode adicionar tratamento de erro aqui
