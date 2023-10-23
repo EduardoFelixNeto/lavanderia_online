@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
-import { User } from 'src/app/shared/models/user.model';
+import { Customer } from 'src/app/shared/models/customer.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,22 +10,22 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email: string = '';
   password: string = '';
-  user!: User;
+  customer!: Customer;
   message!: string;
 
   constructor(private authService: AuthenticationService, private router: Router) { }
 
   onLogin(): void {
     this.authService.login(this.email, this.password).subscribe(
-      (users) => {
-        if (users.length > 0) {
-          for (let index = 0; index < users.length; index++) {
-            const em = users[index].email;
-            const pwd = users[index].password;
+      (customers) => {
+        if (customers.length > 0) {
+          for (let index = 0; index < customers.length; index++) {
+            const em = customers[index].email;
+            const pwd = customers[index].password;
             if (this.email == em && this.password == pwd) {
-              this.user = users[index];
-              if (this.user.profile == 'user') {
-                this.router.navigate(['/user_homepage']);
+              this.customer = customers[index];
+              if (this.customer.profile == 'customer') {
+                this.router.navigate(['/customer_homepage']);
               }
             } else {
               this.message = 'Erro ao fazer login! Verifique suas credenciais.';

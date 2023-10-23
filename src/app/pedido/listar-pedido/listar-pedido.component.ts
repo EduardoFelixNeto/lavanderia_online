@@ -3,7 +3,7 @@ import { PedidoService } from '../services/pedido.service';
 import { Pedido } from 'src/app/shared/models/pedido.model';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/login/services/authentication.service'; // Atualize o caminho
-import { User } from 'src/app/shared/models/user.model';
+import { Customer } from 'src/app/shared/models/customer.model';
 
 
 @Component({
@@ -15,17 +15,17 @@ export class ListarPedidoComponent implements OnInit{
   
   pedidos: Pedido[] = [];
 
-  currentUser: User | null;
+  currentCustomer: Customer | null;
 
   constructor(private pedidoService: PedidoService, private router: Router, private authService: AuthenticationService) {
-    this.currentUser = this.authService.getCurrentUser();
+    this.currentCustomer = this.authService.getCurrentCustomer();
    }
   
   ngOnInit(): void {
-    const currentUser = this.authService.getCurrentUser();
-    if (this.currentUser && this.currentUser.id) {
-    if (currentUser) {
-        this.pedidoService.listByUserId(this.currentUser.id).subscribe(data => {
+    const currentCustomer = this.authService.getCurrentCustomer();
+    if (this.currentCustomer && this.currentCustomer.id) {
+    if (currentCustomer) {
+        this.pedidoService.listByCustomerId(this.currentCustomer.id).subscribe(data => {
             this.pedidos = data;
         });
     } else {
@@ -34,7 +34,7 @@ export class ListarPedidoComponent implements OnInit{
   }
 }
   returnLoginPage(): void {
-    this.router.navigate(['/user_homepage']); // 3. Use o método navigate
+    this.router.navigate(['/customer_homepage']); // 3. Use o método navigate
   }
 
   novoPedido(): void{

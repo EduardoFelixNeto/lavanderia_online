@@ -35,11 +35,11 @@ public class TransactionController {
 	public Transaction findById(@PathVariable(value="id") Long id) throws Exception{
 	    return service.findById(id);
 	}
-	@GetMapping(value = "userId/{id}/status/{status}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<Transaction> findByUserIdAndStatus(
+	@GetMapping(value = "customerId/{id}/status/{status}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Transaction> findByCustomerIdAndStatus(
 	        @PathVariable(value="id") Long id,
 	        @PathVariable(value="status") String status) throws Exception{
-	    return service.findByUserIdAndStatus(id,status);
+	    return service.findByCustomerIdAndStatus(id,status);
 	}
 	@GetMapping("/maxId")
     public ResponseEntity<Long> getMaxTransactionId() {

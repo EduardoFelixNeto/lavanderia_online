@@ -39,11 +39,11 @@ public class TransactionLineServices {
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
 		entity.setTransactionId(transactionLine.getTransactionId());
-		entity.setUserId(transactionLine.getUserId());
 		entity.setItemId(transactionLine.getItemId());
 		entity.setQuantity(transactionLine.getQuantity());
 		entity.setTerm(transactionLine.getTerm());
 		entity.setTotalAmount(transactionLine.getTotalAmount());
+		entity.setCreatedAt(transactionLine.getCreatedAt());
 		
 		return repository.save(transactionLine);
 	}

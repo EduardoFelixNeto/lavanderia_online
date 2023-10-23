@@ -1,5 +1,6 @@
 package br.com.felix.model;
 
+import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -17,8 +18,8 @@ public class Transaction {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	@Column(name = "userId", nullable=false, length = 10)
-	private Integer userId;
+	@Column(name = "customerId", nullable=false, length = 10)
+	private Integer customerId;
 	
 	@Column(name = "status", nullable=true, length = 100)
 	private String status;
@@ -31,6 +32,17 @@ public class Transaction {
 	
 	@Column(name = "isPaid", nullable=false, length = 20)
 	private Boolean isPaid;
+	
+	@Column(name = "createdAt", nullable=false, length = 10)
+	private Date createdAt;
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	public Transaction() {}
 
@@ -42,12 +54,12 @@ public class Transaction {
 		this.id = id;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Integer getCustomerId() {
+		return customerId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
 
 	public String getStatus() {
@@ -84,7 +96,7 @@ public class Transaction {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(amount, id, isPaid, status, term, userId);
+		return Objects.hash(amount, createdAt, customerId, id, isPaid, status, term);
 	}
 
 	@Override
@@ -96,9 +108,10 @@ public class Transaction {
 		if (getClass() != obj.getClass())
 			return false;
 		Transaction other = (Transaction) obj;
-		return Objects.equals(amount, other.amount) && id == other.id && Objects.equals(isPaid, other.isPaid)
-				&& Objects.equals(status, other.status) && Objects.equals(term, other.term)
-				&& Objects.equals(userId, other.userId);
+		return Objects.equals(amount, other.amount) && Objects.equals(createdAt, other.createdAt)
+				&& Objects.equals(customerId, other.customerId) && id == other.id
+				&& Objects.equals(isPaid, other.isPaid) && Objects.equals(status, other.status)
+				&& Objects.equals(term, other.term);
 	}
 	
 	

@@ -1,5 +1,6 @@
 package br.com.felix.model;
 
+import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -20,8 +21,8 @@ public class TransactionLine {
 	@Column(name = "transactionId", nullable=false, length = 10)
 	private Integer transactionId;
 	
-	@Column(name = "userId", nullable=false, length = 10)
-	private Integer userId;
+	@Column(name = "customerId", nullable=false, length = 10)
+	private Integer customerId;
 	
 	@Column(name = "itemId", nullable=false, length = 10)
 	private Integer itemId;
@@ -34,6 +35,17 @@ public class TransactionLine {
 	
 	@Column(name = "totalAmount", nullable=false, length = 10)
 	private Double totalAmount;
+	
+	@Column(name = "createdAt", nullable=false, length = 10)
+	private Date createdAt;
+
+	public Date getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
 	public TransactionLine() {}
 
@@ -53,12 +65,12 @@ public class TransactionLine {
 		this.transactionId = transactionId;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public Integer getCustomerId() {
+		return customerId;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
 	}
 
 	public Integer getItemId() {
@@ -95,7 +107,7 @@ public class TransactionLine {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, itemId, quantity, term, totalAmount, transactionId, userId);
+		return Objects.hash(createdAt, id, itemId, quantity, term, totalAmount, transactionId, customerId);
 	}
 
 	@Override
@@ -107,9 +119,10 @@ public class TransactionLine {
 		if (getClass() != obj.getClass())
 			return false;
 		TransactionLine other = (TransactionLine) obj;
-		return id == other.id && Objects.equals(itemId, other.itemId) && Objects.equals(quantity, other.quantity)
-				&& Objects.equals(term, other.term) && Objects.equals(totalAmount, other.totalAmount)
-				&& Objects.equals(transactionId, other.transactionId) && Objects.equals(userId, other.userId);
+		return Objects.equals(createdAt, other.createdAt) && id == other.id && Objects.equals(itemId, other.itemId)
+				&& Objects.equals(quantity, other.quantity) && Objects.equals(term, other.term)
+				&& Objects.equals(totalAmount, other.totalAmount) && Objects.equals(transactionId, other.transactionId)
+				&& Objects.equals(customerId, other.customerId);
 	}
 
 

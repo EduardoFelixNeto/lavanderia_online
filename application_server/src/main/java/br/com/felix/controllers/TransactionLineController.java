@@ -35,7 +35,7 @@ public class TransactionLineController {
 	public TransactionLine findById(@PathVariable(value="id") Long id) throws Exception{
 	    return service.findById(id);
 	}
-	@GetMapping("transactionLine/maxId")
+	@GetMapping("/maxId")
     public ResponseEntity<Long> getMaxTransactionLineId() {
         Long maxId = service.findMaxId();
         return ResponseEntity.ok(maxId);
@@ -52,7 +52,7 @@ public class TransactionLineController {
 	public TransactionLine update(@RequestBody TransactionLine transactionLine) {
 		return service.update(transactionLine);
 	}
-	@DeleteMapping("transactionLine/{id}")
+	@DeleteMapping("/id/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value="id") Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();	

@@ -15,39 +15,39 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.felix.model.User;
-import br.com.felix.services.UserServices;
+import br.com.felix.model.Customer;
+import br.com.felix.services.CustomerServices;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/customer")
 @CrossOrigin( origins = "http://localhost:4200")
-public class UserController {
+public class CustomerController {
 	
 	@Autowired
-	private UserServices service;
+	private CustomerServices service;
 	
 	@GetMapping(
 			produces=MediaType.APPLICATION_JSON_VALUE)
-	public List<User> findAll() throws Exception{
+	public List<Customer> findAll() throws Exception{
 		return service.findAll();
 	}
 	@GetMapping(value = "/{id}",
 			produces=MediaType.APPLICATION_JSON_VALUE)
-	public User findById(@PathVariable(value="id") Long id) throws Exception{
+	public Customer findById(@PathVariable(value="id") Long id) throws Exception{
 		return service.findById(id);
 	}
 	@PostMapping(
 			consumes=MediaType.APPLICATION_JSON_VALUE,
 			produces=MediaType.APPLICATION_JSON_VALUE)
-	public User create(@RequestBody User user) {
-		return service.create(user);
+	public Customer create(@RequestBody Customer customer) {
+		return service.create(customer);
 	}
 
 	@PutMapping(
 			consumes=MediaType.APPLICATION_JSON_VALUE,
 			produces=MediaType.APPLICATION_JSON_VALUE)
-	public User update(@RequestBody User user) {
-		return service.update(user);
+	public Customer update(@RequestBody Customer customer) {
+		return service.update(customer);
 	}
 	
 	@DeleteMapping("/{id}")

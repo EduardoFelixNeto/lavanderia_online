@@ -14,8 +14,8 @@ export class PedidoService {
 
   constructor(private http: HttpClient) { }
 
-  listByUserId(userId: number): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(`${this.apiUrl}transaction?userId=${userId}`);
+  listByCustomerId(customerId: number): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(`${this.apiUrl}transaction?customerId=${customerId}`);
   }
   listAll(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(`${this.apiUrl}transaction`);
@@ -29,8 +29,8 @@ export class PedidoService {
     return this.http.post<LinhaPedido>(`${this.apiUrl}transactionLine`, linhaPedido);
   }
 
-  listByUserIdAndStatus(userId: number, status: string): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(`${this.apiUrl}transaction/userId/${userId}/status/${status}`);
+  listByCustomerIdAndStatus(customerId: number, status: string): Observable<Pedido[]> {
+    return this.http.get<Pedido[]>(`${this.apiUrl}transaction/customerId/${customerId}/status/${status}`);
   }
 
   addPedido(pedido: Pedido): Observable<Pedido> {
@@ -43,6 +43,10 @@ export class PedidoService {
 
   getLastTransactionLineId(): Observable<number> {
     return this.http.get<number>(`${this.apiUrl}transactionLine/maxId`);
+  }
+
+  deleteTransactionLine(id: number){
+    return this.http.delete<void>(`${this.apiUrl}transactionLine/id/${id}`);
   }
 
 

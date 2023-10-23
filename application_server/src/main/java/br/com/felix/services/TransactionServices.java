@@ -28,8 +28,8 @@ public class TransactionServices {
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 	}
 	
-	public List<Transaction> findByUserIdAndStatus(Long id, String status) {
-	    return repository.findByUserIdAndStatus(id, status);
+	public List<Transaction> findByCustomerIdAndStatus(Long id, String status) {
+	    return repository.findByCustomerIdAndStatus(id, status);
 	}
 
 	
@@ -43,12 +43,12 @@ public class TransactionServices {
 		var entity = repository.findById(transaction.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
-		entity.setUserId(transaction.getUserId());
+		entity.setCustomerId(transaction.getCustomerId());
 		entity.setStatus(transaction.getStatus());
 		entity.setTerm(transaction.getTerm());
 		entity.setAmount(transaction.getAmount());
 		entity.setIsPaid(transaction.getIsPaid());
-		
+		entity.setCreatedAt(transaction.getCreatedAt());
 		return repository.save(transaction);
 	}
 	

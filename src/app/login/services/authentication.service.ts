@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, tap } from 'rxjs';
-import { User } from 'src/app/shared/models/user.model';
+import { Customer } from 'src/app/shared/models/customer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,38 +9,37 @@ import { User } from 'src/app/shared/models/user.model';
 export class AuthenticationService {
 
   private apiUrl = 'http://localhost:8080/';
-  private currentUserSubject: BehaviorSubject<User | null>; // Armazenar o usuário atual usando BehaviorSubject
-  public currentUser: Observable<User | null>; // Observable público para outras partes da aplicação se inscreverem
-
+  private currentCustomerSubject: BehaviorSubject<Customer | null>; // Armazenar o usuário atual usando BehaviorSubject
+  public currentCustomer: Observable<Customer | null>; // Observable público para outras partes da aplicação se inscreverem
 
   constructor(private http: HttpClient) {
-    this.currentUserSubject = new BehaviorSubject<User | null>(null);
-    this.currentUser = this.currentUserSubject.asObservable();
+    this.currentCustomerSubject = new BehaviorSubject<Customer | null>(null);
+    this.currentCustomer = this.currentCustomerSubject.asObservable();
   }
 
-  login(email: string, password: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}user?email=${email}&password=${password}`).pipe(
-      tap((users: User[]) => {
-        if (users && users.length > 0) {
-          this.currentUserSubject.next(users[0]); // Atualiza o currentUserSubject com o usuário retornado
+  login(email: string, password: string): Observable<Customer[]> {
+    return this.http.get<Customer[]>(`${this.apiUrl}customer?email=${email}&password=${password}`).pipe(
+      tap((customers: Customer[]) => {
+        if (customers && customers.length > 0) {
+          this.currentCustomerSubject.next(customers[0]); // Atualiza o currentCustomerSubject com o usuário retornado
         }
       })
     );
   }
 
-  getCurrentUser(): User | null {
-    return this.currentUserSubject.value;
+  getCurrentCustomer(): Customer | null {
+    return this.currentCustomerSubject.value;
   }
 
-  register(user: User): Observable<User> {
-    return this.http.post<User>(`${this.apiUrl}user`, user);
+  register(customer: Customer): Observable<Customer> {
+    return this.http.post<Customer>(`${this.apiUrl}customer`, customer);
   }
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}user`);
+  getAllCustomers(): Observable<Customer[]> {
+    return this.http.get<Customer[]>(`${this.apiUrl}customer`);
   }
 
-  deleteUser(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}user/${id}`);
+  deleteCustomer(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}customer/${id}`);
   }
 
 }

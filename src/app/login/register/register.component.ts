@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service'; // Importe o serviço aqui
-import { User } from 'src/app/shared/models/user.model';
+import { Customer } from 'src/app/shared/models/customer.model';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   templateUrl: './register.component.html'
 })
 export class RegisterComponent {
-  user: User = {
+  customer: Customer = {
     email: '',
     password: ''
   };
@@ -19,21 +19,27 @@ export class RegisterComponent {
 
   onSubmit(): void {
     // Primeiro, verificamos se o usuário já está registrado
-    this.authService.getAllUsers().subscribe(allUsers => {
-        if (allUsers.some(user => user.email === this.user.email)) {
+    this.authService.getAllCustomers().subscribe(allCustomers => {
+        if (allCustomers.some(customer => customer.email === this.customer.email)) {
             this.message = 'E-mail já registrado!';
             return;
         }
 
         // Se o e-mail não estiver registrado, prossiga com o registro
-        const maxId = Math.max(...allUsers.filter(user => user.id !== undefined).map(user => user.id!));
-        const newUser: User = {
+        const now = new Date();
+        const maxId = Math.max(...allCustomers.filter(customer => customer.id !== undefined).map(customer => customer.id!));
+        const newCustomer: Customer = {
             id: maxId + 1,
-            email: this.user.email,
-            password: this.user.password,
-            profile: 'user'
+            email: this.customer.email,
+            password: this.customer.password,
+            name: this.customer.name,
+            cpf: this.customer.cpf,
+            address: this.customer.address,
+            phone: this.customer.phone,
+            profile: 'customer',
+            createdAt: now
         };
-        this.authService.register(newUser).subscribe((response: User) => {
+        this.authService.register(newCustomer).subscribe((response: Customer) => {
             this.returnLoginPage();
         });
     });

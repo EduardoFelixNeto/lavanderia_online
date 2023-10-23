@@ -40,7 +40,7 @@
                 <td>{{linha.quantity}}</td>
                 <td>{{linha.totalAmount}}</td>
                 <td>
-                    <button (click)="removerLinhaPedido(i)" class="btn btn-xs btn-danger">
+                    <button (click)="removerLinhaPedido(linha.id,i); $event.preventDefault()" class="btn btn-xs btn-danger">
                         <i class="fa fa-trash" aria-hidden="true"></i> Remover
                     </button>
                 </td>

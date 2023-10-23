@@ -6,40 +6,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.felix.exceptions.ResourceNotFoundException;
-import br.com.felix.model.User;
-import br.com.felix.repositories.UserRepository;
+import br.com.felix.model.Customer;
+import br.com.felix.repositories.CustomerRepository;
 
 @Service
-public class UserServices {
+public class CustomerServices {
 
 	@Autowired
-	UserRepository repository;
+	CustomerRepository repository;
 	
-	public List<User> findAll() {
+	public List<Customer> findAll() {
 		return repository.findAll();
 	}
 	
-	public User findById(Long id) {
+	public Customer findById(Long id) {
 		
 		return repository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 	}
 	
-	public User create(User user) {
+	public Customer create(Customer customer) {
 		
-		return repository.save(user);
+		return repository.save(customer);
 	}
 	
-	public User update(User user) {
+	public Customer update(Customer customer) {
 		
-		var entity = repository.findById(user.getId())
+		var entity = repository.findById(customer.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
-		entity.setEmail(user.getEmail());
-		entity.setPassword(user.getPassword());
-		entity.setProfile(user.getProfile());
+		entity.setEmail(customer.getEmail());
+		entity.setPassword(customer.getPassword());
+		entity.setProfile(customer.getProfile());
 		
-		return repository.save(user);
+		return repository.save(customer);
 	}
 	
 	public void delete(Long id) {

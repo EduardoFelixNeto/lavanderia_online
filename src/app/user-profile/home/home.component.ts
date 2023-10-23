@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/login/services/authentication.service';
-import { User } from 'src/app/shared/models/user.model';
+import { Customer } from 'src/app/shared/models/customer.model';
 import { PedidoService } from 'src/app/pedido/services/pedido.service';
 import { Pedido } from 'src/app/shared/models/pedido.model';
 
@@ -12,11 +12,11 @@ import { Pedido } from 'src/app/shared/models/pedido.model';
 })
 export class HomeComponent {
 
-  currentUser: User | null;
+  currentCustomer: Customer | null;
   pedidos: Pedido[] = [];
 
   constructor(private router: Router, private authService: AuthenticationService, private pedidoService: PedidoService) {
-    this.currentUser = this.authService.getCurrentUser(); // Obtenha o currentUser ao inicializar o componente
+    this.currentCustomer = this.authService.getCurrentCustomer(); // Obtenha o currentCustomer ao inicializar o componente
   }
 
   goToPedidosPage(): void {
@@ -27,10 +27,10 @@ export class HomeComponent {
     this.router.navigate(['/login']); // 3. Use o método navigate
   }
 
-  removeUser() {
-    if (this.currentUser && this.currentUser.id) { // Certifique-se de que currentUser e currentUser.id estão definidos
+  removeCustomer() {
+    if (this.currentCustomer && this.currentCustomer.id) { // Certifique-se de que currentCustomer e currentCustomer.id estão definidos
       if (confirm("Você tem certeza de que deseja excluir sua conta?")) {
-        this.authService.deleteUser(this.currentUser.id).subscribe(() => {
+        this.authService.deleteCustomer(this.currentCustomer.id).subscribe(() => {
           alert('Conta excluída com sucesso!');
           this.returnLoginPage(); // Redirecionar para a página de login após a exclusão
         }, error => {
@@ -43,8 +43,8 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    if (this.currentUser && this.currentUser.id) {
-      this.pedidoService.listByUserIdAndStatus(this.currentUser.id,encodeURIComponent("Em Aberto")).subscribe(data => {
+    if (this.currentCustomer && this.currentCustomer.id) {
+      this.pedidoService.listByCustomerIdAndStatus(this.currentCustomer.id,encodeURIComponent("Em Aberto")).subscribe(data => {
         this.pedidos = data;
       }, error => {
         // Você pode adicionar tratamento de erro aqui

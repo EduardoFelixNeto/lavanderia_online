@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Rota padrão
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent},
-  { path: 'user_homepage', component: HomeComponent},
+  { path: 'customer_homepage', component: HomeComponent},
   { path: 'pedidos_page', component:ListarPedidoComponent},
   { path: 'novo_pedido_page', component:InserirPedidoComponent}
 ];
