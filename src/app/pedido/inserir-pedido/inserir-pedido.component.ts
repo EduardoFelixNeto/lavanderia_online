@@ -37,24 +37,26 @@ export class InserirPedidoComponent implements OnInit {
   }
 
   incluirItem(item: Item, quantidade: number) {
-    console.log(item);
-    this.pedidoService.getLastPedidoId().subscribe(lastId => {
-      const newPedidoId = lastId + 1;
+    // Pega o último ID da linha de pedido do backend
+    this.pedidoService.getLastTransactionLineId().subscribe(lastLineId => {
+      const newLineId = lastLineId + 1;
       const userId = this.currentUser!.id;
-      const linha = new LinhaPedido(newPedidoId,userId!,item.id!,quantidade);
+      const linha = new LinhaPedido(0, userId!, item.id!, quantidade);  // Pedido ID será definido depois
+      // Defina o ID da linha de pedido
+      linha.id = newLineId;
       linha.totalAmount = item.amount! * quantidade;
       linha.term = item.term!;
-      console.log(item.term);
-      console.log(linha.term);
       this.linhasPedido.push(linha);
-      console.log(linha);
-      this.pedidoService.createTransactionLine(linha).subscribe();
     });
   }
 
+
+
   removerLinhaPedido(index: number) {
+    // Apenas remova da lista em memória
     this.linhasPedido.splice(index, 1);
   }
+
 
   finalizarPedido(): void {
     if (this.currentUser && this.currentUser.id) {
@@ -63,6 +65,7 @@ export class InserirPedidoComponent implements OnInit {
         const userId = this.currentUser!.id;
         const totalAmount = this.linhasPedido.reduce((acc, linha) => acc + linha.totalAmount, 0);
         const maxTerm = Math.max(...this.linhasPedido.map(linha => linha.term || 0));
+
         const newPedido: Pedido = {
           id: newPedidoId,
           userId: userId,
@@ -71,7 +74,16 @@ export class InserirPedidoComponent implements OnInit {
           amount: totalAmount,
           isPaid: false
         };
+
+        // Primeiro, insira o pedido
         this.pedidoService.createTransaction(newPedido).subscribe(() => {
+
+          // Depois que o pedido é inserido com sucesso, comece a inserir as linhas
+          this.linhasPedido.forEach(linha => {
+            linha.transactionId = newPedidoId;  // Defina o ID do pedido para cada linha
+            this.pedidoService.createTransactionLine(linha).subscribe();
+          });
+
           this.router.navigate(['/user_homepage']);
         });
       });
@@ -118,5 +130,8 @@ export class InserirPedidoComponent implements OnInit {
         });
       });
     }
+  }
+  backToHome(): void {
+    this.router.navigate(['/user_homepage']);
   }
 }

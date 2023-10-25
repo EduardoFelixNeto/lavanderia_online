@@ -45,5 +45,7 @@ export class PedidoService {
     return this.http.get<number>(`${this.apiUrl}transactionLine/maxId`);
   }
 
-
+  deleteTransactionLine(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}transactionLine/${id}`);
+  }
 }

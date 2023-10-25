@@ -52,5 +52,7 @@
     <button (click)="finalizarPedido(); $event.preventDefault()" style="display: inline; margin: 1%;" href="#" title="Aprovar" alt="Aprovar"
         class="btn btn-primary"> Aprovar orçamento</button>
     <button (click)="cancelarPedido(); $event.preventDefault()" style="margin: 1%;" href="#" title="Cancelar" alt="Cancelar" 
-        class="btn btn-xs btn-danger"> Cancelar Pedido </button>
+        class="btn btn-xs btn-danger"> Recusar orçamento </button>
+        <button (click)="backToHome(); $event.preventDefault()" style="margin: 1%;" href="#" title="Sair" alt="Sair" 
+        class="btn btn-xs btn-danger"> Sair </button>
 </div>
