@@ -17,24 +17,25 @@ export class LoginComponent {
 
   onLogin(): void {
     this.authService.login(this.email, this.password).subscribe(
-      (users) => {
-        if (users.length > 0) {
-          for (let index = 0; index < users.length; index++) {
-            const em = users[index].email;
-            const pwd = users[index].password;
-            if (this.email == em && this.password == pwd) {
-              this.user = users[index];
-              if (this.user.profile == 'user') {
-                this.router.navigate(['/user_homepage']);
-              }
-            } else {
-              this.message = 'Erro ao fazer login! Verifique suas credenciais.';
-            }
+      (user) => {
+        if (user) {
+          this.user = user;
+
+          // Navigate based on user profile
+          if (this.user.profile === 'user') {
+            this.router.navigate(['/user_homepage']);
+          } else {
+            // Navigate to other pages based on other profiles (if necessary)
           }
         }
+      },
+      (error) => {
+        // Handle error response
+        this.message = 'Erro ao fazer login! Verifique suas credenciais.';
       }
     );
-  }
+}
+
 
   onRegister(): void {
     this.router.navigate(['/register']); // 3. Use o método navigate

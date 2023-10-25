@@ -1,8 +1,10 @@
 package br.com.felix.controllers;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -55,5 +57,30 @@ public class UserController {
 		service.delete(id);
 		return ResponseEntity.noContent().build();	
 		}
+	
+	public static class LoginRequest {
+        public String email;
+        public String password;
+    }
 
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
+	    User user = service.findByEmail(loginRequest.email);
+
+	    if (user == null) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
+	    }
+
+	    // Como mencionado anteriormente, é uma verificação simplificada.
+	    // Em um cenário real, hash a senha e compare com a senha armazenada.
+	    if (!user.getPassword().equals(loginRequest.password)) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid password");
+	    }
+
+	    // Excluindo a senha antes de enviar para o cliente
+	    user.setPassword(null);
+
+	    return ResponseEntity.ok(user);
+	}
 }
+

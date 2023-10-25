@@ -48,5 +48,10 @@ public class UserServices {
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		repository.delete(entity);
 	}
+
+	public User findByEmail(String email) {
+        return repository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("No records found for this email!"));
+    }
 	
 }

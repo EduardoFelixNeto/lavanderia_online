@@ -18,11 +18,18 @@ export class AuthenticationService {
     this.currentUser = this.currentUserSubject.asObservable();
   }
 
-  login(email: string, password: string): Observable<User[]> {
-    return this.http.get<User[]>(`${this.apiUrl}user?email=${email}&password=${password}`).pipe(
-      tap((users: User[]) => {
-        if (users && users.length > 0) {
-          this.currentUserSubject.next(users[0]); // Atualiza o currentUserSubject com o usuário retornado
+  login(email: string, password: string): Observable<User> {
+    const payload = {
+      email: email,
+      password: password
+    };
+
+    return this.http.post<User>(`${this.apiUrl}user/login`, payload).pipe(
+      tap((user: User) => {
+        if (user) {
+          this.currentUserSubject.next(user);
+          // Agora você tem acesso ao ID do usuário e ao perfil
+          console.log(user.id, user.profile);
         }
       })
     );
