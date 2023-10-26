@@ -43,4 +43,12 @@ export class ListarPedidoComponent implements OnInit {
   verPedido() {
 
   }
+
+  onSubmitID(){
+
+  }
+
+  onSubmitStatus(){
+    
+  }
 }
