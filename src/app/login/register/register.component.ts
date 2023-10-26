@@ -31,10 +31,15 @@ export class RegisterComponent {
             id: maxId + 1,
             email: this.user.email,
             password: this.user.password,
-            profile: 'user'
+            profile: 'user',
+            cpf: this.user.cpf,
+            name: this.user.name,
+            address: this.user.address,
+            phone: this.user.phone
         };
         this.authService.register(newUser).subscribe((response: User) => {
             this.returnLoginPage();
+            
         });
     });
 }

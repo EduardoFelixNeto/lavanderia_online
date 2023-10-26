@@ -16,6 +16,38 @@
           <input type="password" class="form-control" id="password" [(ngModel)]="user.password" name="password" required>
         </div>
       </div>
+
+      <div class="mb-3">
+        <label for="cpf" class="form-label">CPF:</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+          <input type="text" class="form-control" id="cpf" [(ngModel)]="user.cpf" name="cpf" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome:</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fas fa-user"></i></span>
+          <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="address" class="form-label">Endereço:</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa-solid fa-house-user"></i></span>
+          <input type="text" class="form-control" id="address" [(ngModel)]="user.address" name="address" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="phone" class="form-label">Telefone:</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa fa-phone"></i></span>
+          <input type="phone" class="form-control" id="phone" [(ngModel)]="user.phone" name="phone" required>
+        </div>
+      </div>
   
       <button type="submit" class="btn btn-primary">Cadastrar</button>
     </form>

@@ -15,7 +15,7 @@ export class PedidoService {
   constructor(private http: HttpClient) { }
 
   listByUserId(userId: number): Observable<Pedido[]> {
-    return this.http.get<Pedido[]>(`${this.apiUrl}transaction?userId=${userId}`);
+    return this.http.get<Pedido[]>(`${this.apiUrl}transaction/userId/${userId}`);
   }
   listAll(): Observable<Pedido[]> {
     return this.http.get<Pedido[]>(`${this.apiUrl}transaction`);

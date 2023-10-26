@@ -31,9 +31,9 @@ public class TransactionController {
 	public List<Transaction> findAll() throws Exception{
 		return service.findAll();
 	}
-	@GetMapping(value = "/id/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
-	public Transaction findById(@PathVariable(value="id") Long id) throws Exception{
-	    return service.findById(id);
+	@GetMapping(value = "/userId/{userId}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Transaction> findByUserId(@PathVariable(value="userId") Integer userId) throws Exception{
+	    return service.findByUserId(userId);
 	}
 	@GetMapping(value = "userId/{id}/status/{status}", produces=MediaType.APPLICATION_JSON_VALUE)
 	public List<Transaction> findByUserIdAndStatus(

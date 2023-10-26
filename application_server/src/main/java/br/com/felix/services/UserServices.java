@@ -38,6 +38,10 @@ public class UserServices {
 		entity.setEmail(user.getEmail());
 		entity.setPassword(user.getPassword());
 		entity.setProfile(user.getProfile());
+		entity.setCpf(user.getCpf());
+		entity.setName(user.getName());
+		entity.setAddress(user.getAddress());
+		entity.setPhone(user.getPhone());
 		
 		return repository.save(user);
 	}

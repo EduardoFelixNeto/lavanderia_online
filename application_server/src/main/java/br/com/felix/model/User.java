@@ -19,15 +19,21 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	
 	@Column(name = "email", nullable=false, length = 100)
 	private String email;
-	
 	@Column(name = "password", nullable=false, length = 100)
 	private String password;
-	
 	@Column(name = "profile", nullable=false, length = 20)
 	private String profile;
+	@Column(name = "cpf", nullable=false, length = 20)
+	private String cpf;
+	@Column(name = "name", nullable=false, length = 100)
+	private String name;
+	@Column(name = "address", nullable=false, length = 200)
+	private String address;
+	@Column(name = "phone", nullable=false, length = 20)
+	private String phone;
+	
 
 	public User() {}
 
@@ -62,10 +68,43 @@ public class User implements Serializable {
 	public void setProfile(String profile) {
 		this.profile = profile;
 	}
+	
+	
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(email, id, password, profile);
+		return Objects.hash(address, cpf, email, id, name, password, phone, profile);
 	}
 
 	@Override
@@ -77,7 +116,9 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(email, other.email) && id == other.id && Objects.equals(password, other.password)
+		return Objects.equals(address, other.address) && Objects.equals(cpf, other.cpf)
+				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
+				&& Objects.equals(password, other.password) && Objects.equals(phone, other.phone)
 				&& Objects.equals(profile, other.profile);
 	}
 	

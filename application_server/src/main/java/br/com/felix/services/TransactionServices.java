@@ -31,6 +31,10 @@ public class TransactionServices {
 	public List<Transaction> findByUserIdAndStatus(Long id, String status) {
 	    return repository.findByUserIdAndStatus(id, status);
 	}
+	
+	public List<Transaction> findByUserId(Integer userId) {
+	    return repository.findByUserId(userId);
+	}
 
 	
 	public Transaction create(Transaction transaction) {
