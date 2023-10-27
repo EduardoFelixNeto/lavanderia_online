@@ -42,7 +42,7 @@ export class ListarPedidoComponent implements OnInit {
     this.router.navigate(['/novo_pedido_page']); // 3. Use o método navigate
   }
 
-  verPedido() {
+  pagarPedido() {
 
   }
 
@@ -84,4 +84,8 @@ export class ListarPedidoComponent implements OnInit {
     this.activeFilters = { id: null, status: null, pago: false };
     this.applyFilters();
   }
+
+  abrirModalPedido(){}
+
+  cancelarPedido(){}
 }

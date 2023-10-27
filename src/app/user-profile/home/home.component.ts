@@ -60,7 +60,7 @@ export class HomeComponent {
     this.router.navigate(['/novo_pedido_page']); // 3. Use o método navigate
   }
 
-  pagarPedido(): void {
-  }
+  cancelarPedido(){}
 
+  abrirModalPedido(){}
 }

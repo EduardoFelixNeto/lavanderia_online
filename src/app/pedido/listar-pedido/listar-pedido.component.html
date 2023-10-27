@@ -1,4 +1,4 @@
-<div style="padding-left: 15%; padding-right: 15%;" class="container mt-5">
+<div style="padding-left: 10%; padding-right: 10%;" class="container mt-5">
     <h1>Pedidos</h1>
     <div class="filters-container">
         <form (ngSubmit)="onSubmitID(+quantidadeInput.value)">
@@ -43,10 +43,19 @@
                 <td>{{pedido.status}}</td>
                 <td>{{pedido.term}}</td>
                 <td>{{pedido.amount}}</td>
-                <td class="text-center" style="width: 300px">
-                    <button (click)="verPedido(); $event.preventDefault()" style="margin: 1%;" href="#" title="Pagar"
+                <td class="text-center" style="width: 400px">
+                    <button (click)="abrirModalPedido(); $event.preventDefault()" style="display: inline; margin: 1%;"
+                        href="#" title="Ver" alt="Ver" class="btn btn-primary"><i class="fa fa-eye"
+                            aria-hidden="true"></i> Ver Pedido</button>
+                    <button *ngIf="pedido.status == 'Em Aberto'"
+                        (click)="cancelarPedido(); $event.preventDefault()" style="margin: 1%;" href="#" title="Pagar"
+                        alt="Pagar" class="btn btn-xs btn-danger">
+                        <i class="fa-solid fa-xmark"></i> Cancelar Pedido
+                    </button>
+                    <button *ngIf="pedido.status == 'Aguardando Pagamento'"
+                        (click)="pagarPedido(); $event.preventDefault()" style="margin: 1%;" href="#" title="Pagar"
                         alt="Pagar" class="btn btn-xs btn-info">
-                        <i class="fa fa-edit" aria-hidden="true"></i> Pagar Pedido
+                        <i class="fa fa-dollar"></i> Pagar Pedido
                     </button>
                 </td>
             </tr>
