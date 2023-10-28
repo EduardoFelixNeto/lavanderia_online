@@ -49,4 +49,8 @@ export class PedidoService {
     return this.http.delete<void>(`${this.apiUrl}transactionLine/${id}`);
   }
 
+  updatePedido(pedido: Pedido): Observable<Pedido> {
+    return this.http.put<Pedido>(`${this.apiUrl}transaction/${pedido.id}`, pedido);
+  }
+
 }

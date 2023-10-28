@@ -51,41 +51,69 @@ export class ListarPedidoComponent implements OnInit {
     status: null as string | null,
     pago: false
   };
-  
+
   applyFilters(): void {
     this.pedidos = this.originalPedidos;
-  
+
     if (this.activeFilters.id) {
       this.pedidos = this.pedidos.filter(pedido => pedido.id === this.activeFilters.id);
     }
-    
+
     if (this.activeFilters.status) {
       this.pedidos = this.pedidos.filter(pedido => pedido.status === this.activeFilters.status);
     }
   }
-  
+
   onSubmitID(buscaPorId: number): void {
     this.activeFilters.id = buscaPorId;
     this.applyFilters();
   }
-  
+
   onSubmitStatus(buscarPorStatus: string): void {
     this.activeFilters.status = buscarPorStatus;
     this.applyFilters();
   }
-  
+
   toggleFilter(event: Event): void {
     const inputElement = event.target as HTMLInputElement;
     this.activeFilters.pago = inputElement.checked;
     this.applyFilters();
   }
-  
+
   resetFilters(): void {
     this.activeFilters = { id: null, status: null, pago: false };
     this.applyFilters();
   }
 
-  abrirModalPedido(){}
+  abrirModalPedido() { }
 
-  cancelarPedido(){}
+  cancelarPedido(pedidoId: number | undefined): void {
+    if (typeof pedidoId === 'undefined') {
+      // Lidar com o erro ou retornar
+      console.error('ID do pedido não fornecido.');
+      return;
+    }
+
+    // Encontra o pedido pelo ID
+    const pedido = this.originalPedidos.find(p => p.id === pedidoId);
+    if (!pedido) {
+      console.error('Pedido não encontrado!');
+      return;
+    }
+
+    // Atualiza o status do pedido para "Cancelado" (ou outro status apropriado)
+    pedido.status = 'Rejeitado';
+
+    // Envia a atualização para o servidor
+    this.pedidoService.updatePedido(pedido).subscribe({
+      next: (updatedPedido) => {
+        console.log('Pedido cancelado com sucesso:', updatedPedido);
+        // Atualiza a lista de pedidos com as informações mais recentes
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.error('Erro ao cancelar o pedido:', err);
+      }
+    });
+  }
 }
