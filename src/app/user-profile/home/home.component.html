@@ -30,7 +30,7 @@
                     <button (click)="abrirModalPedido(); $event.preventDefault()" style="display: inline; margin: 1%;"
                         href="#" title="Ver" alt="Ver" class="btn btn-primary"><i class="fa fa-eye"
                             aria-hidden="true"></i> Ver Pedido</button>
-                    <button *ngIf="pedido.status == 'Em Aberto'" (click)="cancelarPedido(); $event.preventDefault()"
+                    <button *ngIf="pedido.status == 'Em Aberto'" (click)="cancelarPedido(pedido.id); $event.preventDefault()"
                         style="margin: 1%;" href="#" title="Pagar" alt="Pagar" class="btn btn-xs btn-danger">
                         <i class="fa-solid fa-xmark"></i> Cancelar Pedido
                     </button>

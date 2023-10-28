@@ -60,7 +60,35 @@ export class HomeComponent {
     this.router.navigate(['/novo_pedido_page']); // 3. Use o método navigate
   }
 
-  cancelarPedido(){}
+  cancelarPedido(pedidoId: number | undefined): void {
+    if (typeof pedidoId === 'undefined') {
+      // Lidar com o erro ou retornar
+      console.error('ID do pedido não fornecido.');
+      return;
+    }
+
+    // Encontra o pedido pelo ID
+    const pedido = this.pedidos.find(p => p.id === pedidoId);
+    if (!pedido) {
+      console.error('Pedido não encontrado!');
+      return;
+    }
+
+    // Atualiza o status do pedido para "Cancelado" (ou outro status apropriado)
+    pedido.status = 'Rejeitado';
+
+    // Envia a atualização para o servidor
+    this.pedidoService.updatePedido(pedido).subscribe({
+      next: (updatedPedido) => {
+        console.log('Pedido cancelado com sucesso:', updatedPedido);
+        // Atualiza a lista de pedidos com as informações mais recentes
+        this.ngOnInit();
+      },
+      error: (err) => {
+        console.error('Erro ao cancelar o pedido:', err);
+      }
+    });
+  }
 
   abrirModalPedido(){}
 }
