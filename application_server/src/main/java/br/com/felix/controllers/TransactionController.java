@@ -54,11 +54,12 @@ public class TransactionController {
 	}
 
 	@PutMapping(
-			consumes=MediaType.APPLICATION_JSON_VALUE,
-			produces=MediaType.APPLICATION_JSON_VALUE)
-	public Transaction update(@RequestBody Transaction transaction) {
-		return service.update(transaction);
-	}
+		    path = "/{id}",
+		    consumes = MediaType.APPLICATION_JSON_VALUE,
+		    produces = MediaType.APPLICATION_JSON_VALUE)
+		public Transaction update(@PathVariable("id") Long id, @RequestBody Transaction transaction) {
+		    return service.update(transaction);
+		}
 	
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> delete(@PathVariable(value="id") Long id) {
