@@ -1,6 +1,5 @@
 package br.com.felix.controllers;
 
-import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

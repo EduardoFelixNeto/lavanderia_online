@@ -12,8 +12,6 @@
             <tr>
                 <th>ID</th>
                 <th>UserId</th>
-                <th>Nome do usuário</th>
-                <th>CPF</th>
                 <th>Status</th>
                 <th>Prazo</th>
                 <th>Valor</th>
@@ -21,9 +19,7 @@
             </tr>
             <tr *ngFor="let pedido of pedidos">
                 <td>{{pedido.id}}</td>
-                <td>{{pedido.UserId}}</td> 
-                <td>{{user.name}}</td>
-                <td>{{user.cpf}}</td>
+                <td>{{pedido.userId}}</td> 
                 <td>{{pedido.status}}</td>
                 <td>{{pedido.term}}</td>
                 <td>{{pedido.amount}}</td>
