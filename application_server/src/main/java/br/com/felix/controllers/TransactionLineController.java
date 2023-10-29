@@ -35,6 +35,10 @@ public class TransactionLineController {
 	public TransactionLine findById(@PathVariable(value="id") Long id) throws Exception{
 	    return service.findById(id);
 	}
+	@GetMapping(value = "/transactionId/{id}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<TransactionLine> findByTransactionId(@PathVariable(value="id") Long id) throws Exception{
+	    return service.findByTransactionId(id);
+	}
 	@GetMapping("/maxId")
     public ResponseEntity<Long> getMaxTransactionLineId() {
         Long maxId = service.findMaxId();

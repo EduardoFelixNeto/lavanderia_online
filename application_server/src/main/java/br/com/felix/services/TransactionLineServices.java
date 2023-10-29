@@ -55,4 +55,8 @@ public class TransactionLineServices {
 		repository.delete(entity);
 	}
 
+	public List<TransactionLine> findByTransactionId(Long transactionId) {
+		return repository.findByTransactionId(transactionId);
+	}
+
 }

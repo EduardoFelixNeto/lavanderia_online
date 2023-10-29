@@ -53,4 +53,8 @@ export class PedidoService {
     return this.http.put<Pedido>(`${this.apiUrl}transaction/${pedido.id}`, pedido);
   }
 
+  listByPedidoId(pedidoId: number): Observable<LinhaPedido[]> {
+    return this.http.get<LinhaPedido[]>(`${this.apiUrl}transactionLine/transactionId/${pedidoId}`);
+  }
+
 }
