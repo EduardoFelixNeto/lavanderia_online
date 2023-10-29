@@ -6,10 +6,11 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { InserirPedidoComponent } from './inserir-pedido/inserir-pedido.component';
 import { ModalPedidoComponent } from './modal-pedido/modal-pedido.component';
+import { ModalConsultarPedidoComponent } from './modal-consultar-pedido/modal-consultar-pedido.component';
 
 
 @NgModule({
-  declarations: [ListarPedidoComponent, InserirPedidoComponent, ModalPedidoComponent],
+  declarations: [ListarPedidoComponent, InserirPedidoComponent, ModalPedidoComponent, ModalConsultarPedidoComponent],
   imports: [
     CommonModule,
     RouterModule,

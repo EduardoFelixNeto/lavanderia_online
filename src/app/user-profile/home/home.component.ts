@@ -4,6 +4,8 @@ import { AuthenticationService } from 'src/app/login/services/authentication.ser
 import { User } from 'src/app/shared/models/user.model';
 import { PedidoService } from 'src/app/pedido/services/pedido.service';
 import { Pedido } from 'src/app/shared/models/pedido.model';
+import { ModalConsultarPedidoComponent } from 'src/app/pedido/modal-consultar-pedido/modal-consultar-pedido.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +17,8 @@ export class HomeComponent {
   currentUser: User | null;
   pedidos: Pedido[] = [];
 
-  constructor(private router: Router, private authService: AuthenticationService, private pedidoService: PedidoService) {
+  constructor(private router: Router, private authService: AuthenticationService, private pedidoService: PedidoService
+    , private modalService: NgbModal) {
     this.currentUser = this.authService.getCurrentUser(); // Obtenha o currentUser ao inicializar o componente
   }
 
@@ -90,5 +93,8 @@ export class HomeComponent {
     });
   }
 
-  abrirModalPedido(){}
+  abrirModalPedido(pedido: Pedido) {
+    const modalRef = this.modalService.open(ModalConsultarPedidoComponent);
+    modalRef.componentInstance.pedido = pedido;
+  }
 }

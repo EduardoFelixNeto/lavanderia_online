@@ -4,6 +4,8 @@ import { Pedido } from 'src/app/shared/models/pedido.model';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/login/services/authentication.service'; // Atualize o caminho
 import { User } from 'src/app/shared/models/user.model';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ModalConsultarPedidoComponent } from '../modal-consultar-pedido/modal-consultar-pedido.component';
 
 
 @Component({
@@ -18,7 +20,8 @@ export class ListarPedidoComponent implements OnInit {
 
   currentUser: User | null;
 
-  constructor(private pedidoService: PedidoService, private router: Router, private authService: AuthenticationService) {
+  constructor(private pedidoService: PedidoService, private router: Router, private authService: AuthenticationService
+    , private modalService: NgbModal) {
     this.currentUser = this.authService.getCurrentUser();
   }
 
@@ -85,7 +88,10 @@ export class ListarPedidoComponent implements OnInit {
     this.applyFilters();
   }
 
-  abrirModalPedido() { }
+  abrirModalPedido(pedido: Pedido) {
+    const modalRef = this.modalService.open(ModalConsultarPedidoComponent);
+    modalRef.componentInstance.pedido = pedido;
+  }
 
   cancelarPedido(pedidoId: number | undefined): void {
     if (typeof pedidoId === 'undefined') {

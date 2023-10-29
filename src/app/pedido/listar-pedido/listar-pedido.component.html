@@ -44,7 +44,7 @@
                 <td>{{pedido.term}}</td>
                 <td>{{pedido.amount}}</td>
                 <td class="text-center" style="width: 400px">
-                    <button (click)="abrirModalPedido(); $event.preventDefault()" style="display: inline; margin: 1%;"
+                    <button (click)="abrirModalPedido(pedido); $event.preventDefault()" style="display: inline; margin: 1%;"
                         href="#" title="Ver" alt="Ver" class="btn btn-primary"><i class="fa fa-eye"
                             aria-hidden="true"></i> Ver Pedido</button>
                     <button *ngIf="pedido.status == 'Em Aberto'"
