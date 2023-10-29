@@ -26,6 +26,10 @@ export class HomeComponent {
     this.router.navigate(['/pedidos_page']); // 3. Use o método navigate
   }
 
+  goToInserirItemPage(): void{
+    this.router.navigate(['/item_page']); // 3. Use o método navigate
+  }
+
   returnLoginPage(): void {
     this.router.navigate(['/login']); // 3. Use o método navigate
   }

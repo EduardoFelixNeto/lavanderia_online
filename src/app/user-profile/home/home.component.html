@@ -1,11 +1,5 @@
 <div style="padding-left: 15%; padding-right: 15%;" class="container mt-5">
-    <h1>Home</h1>
-    <button style="display: inline; margin: 1%;" (click)="goToPedidosPage(); $event.preventDefault()"
-        class="btn btn-primary">Listar Pedidos</button>
-    <button style="display: inline; margin: 1%;" (click)="returnLoginPage(); $event.preventDefault()"
-        class="btn btn-primary">Sair</button>
-    <button style="display: inline; margin: 1%;" (click)="removeUser(); $event.preventDefault()"
-        class="btn btn-primary">Excluir conta</button>
+    <h1>Home Usuário</h1>
     <h2>Pedidos</h2>
     <table class="table table-striped table-bordered table-hover">
         <tbody>
@@ -27,11 +21,12 @@
                 <td>{{pedido.term}}</td>
                 <td>{{pedido.amount}}</td>
                 <td class="text-center" style="width: 400px">
-                    <button (click)="abrirModalPedido(pedido); $event.preventDefault()" style="display: inline; margin: 1%;"
-                        href="#" title="Ver" alt="Ver" class="btn btn-primary"><i class="fa fa-eye"
-                            aria-hidden="true"></i> Ver Pedido</button>
-                    <button *ngIf="pedido.status == 'Em Aberto'" (click)="cancelarPedido(pedido.id); $event.preventDefault()"
-                        style="margin: 1%;" href="#" title="Pagar" alt="Pagar" class="btn btn-xs btn-danger">
+                    <button (click)="abrirModalPedido(pedido); $event.preventDefault()"
+                        style="display: inline; margin: 1%;" href="#" title="Ver" alt="Ver" class="btn btn-primary"><i
+                            class="fa fa-eye" aria-hidden="true"></i> Ver Pedido</button>
+                    <button *ngIf="pedido.status == 'Em Aberto'"
+                        (click)="cancelarPedido(pedido.id); $event.preventDefault()" style="margin: 1%;" href="#"
+                        title="Pagar" alt="Pagar" class="btn btn-xs btn-danger">
                         <i class="fa-solid fa-xmark"></i> Cancelar Pedido
                     </button>
                 </td>
@@ -39,4 +34,10 @@
         </tbody>
     </table>
     <p *ngIf="pedidos.length==0">Nenhum pedido cadastrado.</p>
+    <button style="display: inline; margin: 1%;" (click)="goToPedidosPage(); $event.preventDefault()"
+        class="btn btn-primary">Listar Pedidos</button>
+    <button style="display: inline; margin: 1%;" (click)="returnLoginPage(); $event.preventDefault()"
+        class="btn btn-primary">Sair</button>
+    <button style="display: inline; margin: 1%;" (click)="removeUser(); $event.preventDefault()"
+        class="btn btn-primary">Excluir conta</button>
 </div>

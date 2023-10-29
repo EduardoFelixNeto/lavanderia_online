@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ManutencaoItemComponent } from './manutencao-item/manutencao-item.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    ManutencaoItemComponent
+  ],
   imports: [
     CommonModule
   ]
