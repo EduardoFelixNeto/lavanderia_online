@@ -79,4 +79,29 @@
   .slider.round:before {
     border-radius: 50%;
   }
+
+  .status-em-aberto {
+    background-color: yellow;
+}
+
+.status-rejeitado, .status-cancelado {
+    background-color: red;
+}
+
+.status-recolhido {
+    background-color: grey;
+}
+
+.status-aguardando-pagamento {
+    background-color: blue;
+}
+
+.status-pago {
+    background-color: orange;
+}
+
+.status-finalizado {
+    background-color: green;
+}
+
   

@@ -17,10 +17,10 @@ export class HomeComponent {
   currentUser: User | null | undefined;
   pedidos: Pedido[] = [];
 
-  constructor(private router: Router,private authService: AuthenticationService, private pedidoService: PedidoService
-    , private modalService: NgbModal){
-      this.currentUser = this.authService.getCurrentUser();
-    }
+  constructor(private router: Router, private authService: AuthenticationService, private pedidoService: PedidoService
+    , private modalService: NgbModal) {
+    this.currentUser = this.authService.getCurrentUser();
+  }
 
   goToPedidosPage(): void {
     this.router.navigate(['/pedidos_page']); // 3. Use o método navigate
@@ -46,7 +46,7 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    if (this.currentUser && this.currentUser.id && this,this.currentUser?.profile == 'admin') {
+    if (this.currentUser && this.currentUser.id && this.currentUser?.profile == 'admin') {
       this.pedidoService.listAllbyStatus(encodeURIComponent("Em Aberto")).subscribe(data => {
         this.pedidos = data;
       }, error => {
@@ -93,4 +93,5 @@ export class HomeComponent {
     const modalRef = this.modalService.open(ModalConsultarPedidoComponent);
     modalRef.componentInstance.pedido = pedido;
   }
+
 }

@@ -28,39 +28,62 @@
         <tbody>
             <tr>
                 <th>ID</th>
+                <th *ngIf="currentUser!.profile == 'admin'" >User Id</th>
                 <th>Status</th>
                 <th>Prazo</th>
                 <th>Valor</th>
-                <th class="text-center">
+                <th class="text-center" *ngIf="currentUser!.profile == 'user'">
                     <button (click)="novoPedido(); $event.preventDefault()" href="#" title="Novo" alt="Novo"
                         class="btn btn-xs btn-success">
                         <i class="fa fa-plus" aria-hidden="true"></i> Novo Pedido
                     </button>
                 </th>
+                <th *ngIf="currentUser!.profile == 'admin'">Mudar Status</th>
             </tr>
             <tr *ngFor="let pedido of pedidos">
                 <td>{{pedido.id}}</td>
-                <td>{{pedido.status}}</td>
+                <td *ngIf="currentUser!.profile == 'admin'">{{pedido.userId}}</td>
+                <td [ngClass]="{
+                    'status-em-aberto': pedido.status === 'Em Aberto',
+                    'status-rejeitado': pedido.status === 'Rejeitado',
+                    'status-cancelado': pedido.status === 'Cancelado',
+                    'status-recolhido': pedido.status === 'Recolhido',
+                    'status-aguardando-pagamento': pedido.status === 'Aguardando Pagamento',
+                    'status-pago': pedido.status === 'Pago',
+                    'status-finalizado': pedido.status === 'Finalizado'
+                }">{{pedido.status}}</td>
                 <td>{{pedido.term}}</td>
                 <td>{{pedido.amount}}</td>
-                <td class="text-center" style="width: 400px">
+                <td class="text-center" style="width: 450px">
                     <button (click)="abrirModalPedido(pedido); $event.preventDefault()" style="display: inline; margin: 1%;"
                         href="#" title="Ver" alt="Ver" class="btn btn-primary"><i class="fa fa-eye"
                             aria-hidden="true"></i> Ver Pedido</button>
-                    <button *ngIf="pedido.status == 'Em Aberto'"
+                    <button *ngIf="pedido.status == 'Em Aberto' && currentUser!.profile =='user'"
                         (click)="cancelarPedido(pedido.id); $event.preventDefault()" style="margin: 1%;" href="#" title="Cancelar"
                         alt="Cancelar" class="btn btn-xs btn-danger">
                         <i class="fa-solid fa-xmark"></i> Cancelar Pedido
                     </button>
-                    <button *ngIf="pedido.status == 'Aguardando Pagamento'"
+                    <button *ngIf="pedido.status == 'Aguardando Pagamento' && currentUser!.profile =='user'"
                         (click)="pagarPedido(pedido); $event.preventDefault()" style="margin: 1%;" href="#" title="Pagar"
                         alt="Pagar" class="btn btn-xs btn-info">
                         <i class="fa fa-dollar"></i> Pagar Pedido
                     </button>
+                    <button *ngIf="pedido.status == 'Em Aberto' && currentUser!.profile =='admin'" (click)="mudarStatusRecolhido(pedido.id); $event.preventDefault()"
+                        style="margin: 1%;" href="#" title="recolhido" alt="recolhido" class="btn btn-xs btn-success">
+                        <i class="fa-solid fa-check"></i> Recolhido
+                    </button>
+                    <button *ngIf="pedido.status == 'Recolhido' && currentUser!.profile =='admin'" (click)="mudarStatusAguardandoPagamento(pedido.id); $event.preventDefault()"
+                    style="margin: 1%;" href="#" title="AguardandoPagamento" alt="AguardandoPagamento" class="btn btn-xs btn-success">
+                    <i class="fa-solid fa-check"></i> Aguardando Pagamento
+                </button>
+                <button *ngIf="pedido.status == 'Pago' && currentUser!.profile =='admin'" (click)="mudarStatusFinalizado(pedido.id); $event.preventDefault()"
+                    style="margin: 1%;" href="#" title="Finalizado" alt="Finalizado" class="btn btn-xs btn-success">
+                    <i class="fa-solid fa-check"></i> Finalizado
+                </button>
                 </td>
             </tr>
         </tbody>
     </table>
     <p *ngIf="pedidos.length==0">Nenhum pedido cadastrado.</p>
-    <button (click)="returnLoginPage(); $event.preventDefault()" class="btn btn-primary">Sair</button>
+    <button (click)="returnHomePage(); $event.preventDefault()" class="btn btn-primary">Sair</button>
 </div>
