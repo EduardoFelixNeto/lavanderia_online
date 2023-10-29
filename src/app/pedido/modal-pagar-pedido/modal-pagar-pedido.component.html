@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <button type="button" class="close" aria-label="Fechar" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <h4 class="modal-title" id="modalLabel"> Pedido </h4>
+</div>
+<div class="modal-body text-center">
+    <div>
+        <p>Id: {{ pedido.id }} </p>
+        <p>Status: {{ pedido.status }}</p>
+        <p>Valor: {{ pedido.amount }}</p>
+    </div>
+    <table class="table table-striped table-bordered table-hover">
+        <tbody>
+            <tr>
+                <th>ID</th>
+                <th>Item</th>
+                <th>Qauntidade</th>
+            </tr>
+            <tr *ngFor="let linhaPedido of linhasPedido">
+                <td>{{linhaPedido.id}}</td>
+                <td>{{linhaPedido.itemId}}</td>
+                <td>{{linhaPedido.quantity}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="modal-footer">
+    <button (click)="confirmarPagamento(pedido.id); $event.preventDefault()" style="margin: 1%;" href="#" title="confirmarPagamento" alt="confirmarPagamento"
+        class="btn btn-xs btn-info">
+        <i class="fa fa-dollar"></i> Confirmar Pagamento
+    </button>
+    <button type="button" class="btn btn-outline-dark" (click)="activeModal.close()">Fechar</button>
+</div>

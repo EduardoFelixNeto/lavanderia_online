@@ -6,6 +6,7 @@ import { AuthenticationService } from 'src/app/login/services/authentication.ser
 import { User } from 'src/app/shared/models/user.model';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalConsultarPedidoComponent } from '../modal-consultar-pedido/modal-consultar-pedido.component';
+import { ModalPagarPedidoComponent } from '../modal-pagar-pedido/modal-pagar-pedido.component';
 
 
 @Component({
@@ -45,8 +46,9 @@ export class ListarPedidoComponent implements OnInit {
     this.router.navigate(['/novo_pedido_page']); // 3. Use o método navigate
   }
 
-  pagarPedido() {
-
+  pagarPedido(pedido: Pedido) {
+    const modalRef = this.modalService.open(ModalPagarPedidoComponent);
+    modalRef.componentInstance.pedido = pedido;
   }
 
   activeFilters = {
