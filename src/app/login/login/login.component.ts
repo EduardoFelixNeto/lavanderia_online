@@ -24,8 +24,8 @@ export class LoginComponent {
           // Navigate based on user profile
           if (this.user.profile === 'user') {
             this.router.navigate(['/user_homepage']);
-          } else {
-            // Navigate to other pages based on other profiles (if necessary)
+          } else if (this.user.profile === 'admin'){
+            this.router.navigate(['/admin_homepage']);
           }
         }
       },

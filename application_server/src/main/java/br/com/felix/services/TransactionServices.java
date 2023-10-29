@@ -63,4 +63,8 @@ public class TransactionServices {
 		repository.delete(entity);
 	}
 
+	public List<Transaction> findAllByStatus(String status) {
+		return repository.findAllByStatus(status);
+	}
+
 }

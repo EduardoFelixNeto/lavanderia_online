@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { LoginModule } from './login/login.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { HomeComponent } from './user-profile/home/home.component';
+import { HomeComponent as UserHomeComponent } from './user-profile/home/home.component';
 import { PedidoModule } from './pedido/pedido.module';
+import { HomeComponent as AdminHomeComponent } from './admin-profile/home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    UserHomeComponent,
+    AdminHomeComponent
   ],
   imports: [
     BrowserModule,

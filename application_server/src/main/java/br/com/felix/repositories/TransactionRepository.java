@@ -16,4 +16,6 @@ public interface TransactionRepository extends JpaRepository<Transaction,Long>{
 	Optional<Transaction> findTopByOrderByIdDesc();
 
 	List<Transaction> findByUserId(Integer userId);
+
+	List<Transaction> findAllByStatus(String status);
 }

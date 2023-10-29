@@ -57,4 +57,8 @@ export class PedidoService {
     return this.http.get<LinhaPedido[]>(`${this.apiUrl}transactionLine/transactionId/${pedidoId}`);
   }
 
+  listAllbyStatus(status: string){
+    return this.http.get<Pedido[]>(`${this.apiUrl}transaction/status/${status}`);
+  }
+
 }

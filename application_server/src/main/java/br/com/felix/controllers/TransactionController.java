@@ -46,6 +46,11 @@ public class TransactionController {
         Long maxId = service.findMaxId();
         return ResponseEntity.ok(maxId);
     }
+	@GetMapping(value = "/status/{status}", produces=MediaType.APPLICATION_JSON_VALUE)
+	public List<Transaction> findAllByStatus(
+	        @PathVariable(value="status") String status) throws Exception{
+	    return service.findAllByStatus(status);
+	}
 	@PostMapping(
 			consumes=MediaType.APPLICATION_JSON_VALUE,
 			produces=MediaType.APPLICATION_JSON_VALUE)

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from 'src/app/login/services/authentication.service';
-import { User } from 'src/app/shared/models/user.model';
+import { ModalConsultarPedidoComponent } from 'src/app/pedido/modal-consultar-pedido/modal-consultar-pedido.component';
 import { PedidoService } from 'src/app/pedido/services/pedido.service';
 import { Pedido } from 'src/app/shared/models/pedido.model';
-import { ModalConsultarPedidoComponent } from 'src/app/pedido/modal-consultar-pedido/modal-consultar-pedido.component';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-home',
@@ -14,13 +14,13 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class HomeComponent {
 
-  currentUser: User | null;
+  currentUser: User | null | undefined;
   pedidos: Pedido[] = [];
 
-  constructor(private router: Router, private authService: AuthenticationService, private pedidoService: PedidoService
-    , private modalService: NgbModal) {
-    this.currentUser = this.authService.getCurrentUser(); // Obtenha o currentUser ao inicializar o componente
-  }
+  constructor(private router: Router,private authService: AuthenticationService, private pedidoService: PedidoService
+    , private modalService: NgbModal){
+      this.currentUser = this.authService.getCurrentUser();
+    }
 
   goToPedidosPage(): void {
     this.router.navigate(['/pedidos_page']); // 3. Use o método navigate
@@ -46,8 +46,8 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    if (this.currentUser && this.currentUser.id) {
-      this.pedidoService.listByUserIdAndStatus(this.currentUser.id, encodeURIComponent("Em Aberto")).subscribe(data => {
+    if (this.currentUser && this.currentUser.id && this,this.currentUser?.profile == 'admin') {
+      this.pedidoService.listAllbyStatus(encodeURIComponent("Em Aberto")).subscribe(data => {
         this.pedidos = data;
       }, error => {
         // Você pode adicionar tratamento de erro aqui
@@ -57,10 +57,6 @@ export class HomeComponent {
       // Lidar com erro - usuário não logado
       console.warn('Usuário não está logado');
     }
-  }
-
-  novoPedido(): void {
-    this.router.navigate(['/novo_pedido_page']); // 3. Use o método navigate
   }
 
   cancelarPedido(pedidoId: number | undefined): void {
