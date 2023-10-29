@@ -59,7 +59,7 @@ export class HomeComponent {
     }
   }
 
-  cancelarPedido(pedidoId: number | undefined): void {
+  mudarStatusRecolhido(pedidoId: number | undefined): void {
     if (typeof pedidoId === 'undefined') {
       // Lidar com o erro ou retornar
       console.error('ID do pedido não fornecido.');
@@ -74,17 +74,17 @@ export class HomeComponent {
     }
 
     // Atualiza o status do pedido para "Cancelado" (ou outro status apropriado)
-    pedido.status = 'Rejeitado';
+    pedido.status = 'Recolhido';
 
     // Envia a atualização para o servidor
     this.pedidoService.updatePedido(pedido).subscribe({
       next: (updatedPedido) => {
-        console.log('Pedido cancelado com sucesso:', updatedPedido);
+        console.log('Status do pedido modificado para recolhido com sucesso:', updatedPedido);
         // Atualiza a lista de pedidos com as informações mais recentes
         this.ngOnInit();
       },
       error: (err) => {
-        console.error('Erro ao cancelar o pedido:', err);
+        console.error('Erro ao mudar o status do pedido:', err);
       }
     });
   }
