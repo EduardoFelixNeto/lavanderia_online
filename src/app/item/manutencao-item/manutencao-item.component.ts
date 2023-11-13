@@ -20,12 +20,17 @@ export class ManutencaoItemComponent {
   }
 
   novoItem(): void {
-    this.router.navigate(['/novo_item_page']); // 3. Use o método navigate
+    this.router.navigate(['/inserir_item']); // 3. Use o método navigate
   }
 
   excluirItem(id: number): void {
-    this.itemService.deleteItem(id);
+    this.itemService.deleteItem(id).subscribe(() => {
+      this.itens = this.itens.filter(item => item.id !== id);
+    }, error => {
+      console.error(`Error when trying to delete item with id ${id}`, error);
+    });
   }
+  
 
   ngOnInit(): void {
     if (this.itens) {

@@ -7,6 +7,7 @@ import { ListarPedidoComponent } from './pedido/listar-pedido/listar-pedido.comp
 import { InserirPedidoComponent } from './pedido/inserir-pedido/inserir-pedido.component';
 import { HomeComponent as AdminProfileHomeComponent } from './admin-profile/home/home.component';
 import { ManutencaoItemComponent } from './item/manutencao-item/manutencao-item.component';
+import { InserirItemComponent } from './item/inserir-item/inserir-item.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Rota padrão
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'pedidos_page', component:ListarPedidoComponent},
   { path: 'novo_pedido_page', component:InserirPedidoComponent},
   { path: 'admin_homepage', component: AdminProfileHomeComponent},
-  { path: 'item_page', component: ManutencaoItemComponent}
+  { path: 'item_page', component: ManutencaoItemComponent},
+  { path: 'inserir_item', component: InserirItemComponent}
 ];
 
 @NgModule({

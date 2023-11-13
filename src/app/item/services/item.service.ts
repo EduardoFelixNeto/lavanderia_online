@@ -8,15 +8,20 @@ import { Observable } from 'rxjs';
 })
 export class ItemService {
 
-  private apiUrl = 'http://localhost:3000/';
+  private apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
 
   listAll(): Observable<Item[]> {
-    return this.http.get<Item[]>(`${this.apiUrl}itens`);
+    return this.http.get<Item[]>(`${this.apiUrl}item`);
   }
 
   deleteItem(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}itens/${id}`);
+    console.log(`${this.apiUrl}item/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}item/${id}`);
+  }
+
+  register(item: Item): Observable<Item> {
+    return this.http.post<Item>(`${this.apiUrl}item`, item);
   }
 }
