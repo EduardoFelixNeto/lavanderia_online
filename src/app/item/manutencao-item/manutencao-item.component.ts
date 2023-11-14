@@ -45,4 +45,9 @@ export class ManutencaoItemComponent {
       console.warn('Usuário não está logado');
     }
   }
+
+  goToUpdatePage(itemId: number): void {
+    // Navigates to the update item page with the item ID
+    this.router.navigate(['/atualizar-item', itemId]);
+  }
 }

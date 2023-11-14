@@ -46,6 +46,7 @@ public class ItemController {
 	}
 	
 	@PutMapping(
+			path = "/{id}",
 			consumes=MediaType.APPLICATION_JSON_VALUE,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	public Item update(@RequestBody Item item) {

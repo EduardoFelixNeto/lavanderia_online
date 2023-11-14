@@ -20,9 +20,13 @@
                 <td>{{item.term}}</td>
                 <td>{{item.amount}}</td>
                 <td class="text-center" style="width: 450px">
+                    <button (click)="goToUpdatePage(item.id!); $event.preventDefault()" style="margin: 1%;" href="#"
+                        title="atualizar" alt="atualizar" class="btn btn-primary">
+                        <i class="fa-solid fa-pen-to-square"></i> Atualizar
+                    </button>
                     <button (click)="excluirItem(item.id!); $event.preventDefault()" style="margin: 1%;" href="#"
                         title="Excluir" alt="Excluir" class="btn btn-xs btn-danger">
-                        <i class="fa-solid fa-xmark"></i> Excluir Item
+                        <i class="fa-solid fa-xmark"></i> Excluir
                     </button>
                 </td>
             </tr>

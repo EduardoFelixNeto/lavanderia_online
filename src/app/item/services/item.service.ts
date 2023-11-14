@@ -24,4 +24,13 @@ export class ItemService {
   register(item: Item): Observable<Item> {
     return this.http.post<Item>(`${this.apiUrl}item`, item);
   }
+
+  getItembyId(id: number): Observable<Item>{
+    return this.http.get<Item>(`${this.apiUrl}item/${id}`)
+  }
+
+  updateItem(id: number, item: Item): Observable<any> {
+    return this.http.put(`${this.apiUrl}item/${id}`, item);
+  }
+
 }
