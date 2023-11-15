@@ -1,0 +1,38 @@
+<div style="padding-left: 25%; padding-right: 25%;" class="container mt-5">
+    <h2>Atualizar Funcionário</h2>
+    <form (ngSubmit)="onUpdate()">
+      <div class="mb-3">
+        <label for="userId" class="form-label">ID do Funcionário:</label>
+        <input type="text" class="form-control" id="userId" [(ngModel)]="admin.id" name="userId" required readonly>
+      </div>
+
+      <div class="mb-3">
+        <label for="name" class="form-label">Nome:</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa-solid fa-font"></i></span>
+          <input type="text" class="form-control" id="name" [(ngModel)]="admin.name" name="name" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">E-mail:</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa-solid fa-dollar-sign"></i></span>
+          <input type="text" class="form-control" id="email" [(ngModel)]="admin.email" name="email" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Senha:</label>
+        <div class="input-group">
+          <span class="input-group-text"><i class="fa-solid fa-truck"></i></span>
+          <input type="text" class="form-control" id="password" [(ngModel)]="admin.password" name="password" required>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary">Atualizar</button>
+    </form>
+    <br>
+    <button (click)="returnToHome(); $event.preventDefault()" class="btn btn-primary">Sair</button>
+    <p *ngIf="message">{{ message }}</p>
+  </div>

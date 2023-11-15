@@ -58,4 +58,8 @@ public class UserServices {
                 .orElseThrow(() -> new ResourceNotFoundException("No records found for this email!"));
     }
 	
+	public List<User> findByProfile(String profile) {
+	    return repository.findByProfile(profile);
+	}
+	
 }

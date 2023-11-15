@@ -6,6 +6,7 @@ import { ModalConsultarPedidoComponent } from 'src/app/pedido/modal-consultar-pe
 import { PedidoService } from 'src/app/pedido/services/pedido.service';
 import { Pedido } from 'src/app/shared/models/pedido.model';
 import { User } from 'src/app/shared/models/user.model';
+import { AdminServiceService } from '../admin-service.service';
 
 @Component({
   selector: 'app-home',
@@ -16,9 +17,10 @@ export class HomeComponent {
 
   currentUser: User | null | undefined;
   pedidos: Pedido[] = [];
+  funcionarios: User[] = [];
 
   constructor(private router: Router, private authService: AuthenticationService, private pedidoService: PedidoService
-    , private modalService: NgbModal) {
+    , private modalService: NgbModal, private adminService: AdminServiceService) {
     this.currentUser = this.authService.getCurrentUser();
   }
 
@@ -50,18 +52,32 @@ export class HomeComponent {
   }
 
   ngOnInit(): void {
-    if (this.currentUser && this.currentUser.id && this.currentUser?.profile == 'admin') {
-      this.pedidoService.listAllbyStatus(encodeURIComponent("Em Aberto")).subscribe(data => {
-        this.pedidos = data;
-      }, error => {
-        // Você pode adicionar tratamento de erro aqui
-        console.error('Erro ao buscar pedidos', error);
-      });
+    if (this.currentUser && this.currentUser.id && this.currentUser?.profile === 'admin') {
+      // Load pedidos
+      this.pedidoService.listAllbyStatus(encodeURIComponent("Em Aberto")).subscribe(
+        data => {
+          this.pedidos = data;
+        }, 
+        error => {
+          console.error('Erro ao buscar pedidos', error);
+        }
+      );
+  
+      // Load all admins
+      this.adminService.getAllAdmins().subscribe(
+        admins => {
+          this.funcionarios = admins; // Assuming you have a property to store the list of admins
+        },
+        error => {
+          console.error('Erro ao buscar admins', error);
+        }
+      );
     } else {
-      // Lidar com erro - usuário não logado
       console.warn('Usuário não está logado');
+      // Additional handling if the user is not logged in or not an admin
     }
   }
+  
 
   mudarStatusRecolhido(pedidoId: number | undefined): void {
     if (typeof pedidoId === 'undefined') {
@@ -96,6 +112,31 @@ export class HomeComponent {
   abrirModalPedido(pedido: Pedido) {
     const modalRef = this.modalService.open(ModalConsultarPedidoComponent);
     modalRef.componentInstance.pedido = pedido;
+  }
+
+  onRegister(): void {
+    this.router.navigate(['/register_func']); // 3. Use o método navigate
+  }
+
+  deleteAdmin(id: number): void {
+    this.adminService.deleteAdmin(id!).subscribe(
+      response => {
+        // Remove the deleted admin from the 'funcionarios' array
+        this.funcionarios = this.funcionarios.filter(admin => admin.id !== id);
+  
+        // Optional: Show a success message
+        console.log('Admin deleted successfully');
+      },
+      error => {
+        // Handle any errors here
+        console.error('Error deleting admin', error);
+      }
+    );
+  }
+
+  goToUpdatePage(itemId: number): void {
+    // Navigates to the update item page with the item ID
+    this.router.navigate(['/atualizar-admin', itemId]);
   }
 
 }

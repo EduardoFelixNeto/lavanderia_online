@@ -45,6 +45,7 @@ public class UserController {
 	}
 
 	@PutMapping(
+			path = "/{id}",
 			consumes=MediaType.APPLICATION_JSON_VALUE,
 			produces=MediaType.APPLICATION_JSON_VALUE)
 	public User update(@RequestBody User user) {
@@ -80,6 +81,11 @@ public class UserController {
 	    user.setPassword(null);
 
 	    return ResponseEntity.ok(user);
+	}
+	
+	@GetMapping(value = "/profile/{profile}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public List<User> findByProfile(@PathVariable(value = "profile") String profile) {
+	    return service.findByProfile(profile);
 	}
 }
 

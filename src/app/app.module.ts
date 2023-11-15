@@ -8,13 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { HomeComponent as UserHomeComponent } from './user-profile/home/home.component';
 import { PedidoModule } from './pedido/pedido.module';
-import { HomeComponent as AdminHomeComponent } from './admin-profile/home/home.component';
+import { AdminProfileModule } from './admin-profile/admin-profile.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserHomeComponent,
-    AdminHomeComponent
+    UserHomeComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +21,8 @@ import { HomeComponent as AdminHomeComponent } from './admin-profile/home/home.c
     LoginModule,
     HttpClientModule,
     FormsModule,
-    PedidoModule
+    PedidoModule,
+    AdminProfileModule
   ],
   providers: [],
   bootstrap: [AppComponent]
