@@ -4,6 +4,9 @@ import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { FormsModule } from '@angular/forms';
 import { AtualizarAdminComponent } from './atualizar-admin/atualizar-admin.component';
+import { RelatorioReceitasComponent } from './relatorio-receitas/relatorio-receitas.component';
+import { RelatorioClientesFieisComponent } from './relatorio-clientes-fieis/relatorio-clientes-fieis.component';
+import { RelatorioClientesComponent } from './relatorio-clientes/relatorio-clientes.component';
 
 
 
@@ -11,7 +14,10 @@ import { AtualizarAdminComponent } from './atualizar-admin/atualizar-admin.compo
   declarations: [
     HomeComponent,
     RegisterComponent,
-    AtualizarAdminComponent
+    AtualizarAdminComponent,
+    RelatorioReceitasComponent,
+    RelatorioClientesFieisComponent,
+    RelatorioClientesComponent
   ],
   imports: [
     CommonModule,

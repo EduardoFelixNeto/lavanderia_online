@@ -11,6 +11,9 @@ import { InserirItemComponent } from './item/inserir-item/inserir-item.component
 import { AtualizarItemComponent } from './item/atualizar-item/atualizar-item.component';
 import { RegisterComponent as AdminProfileRegisterComponent } from './admin-profile/register/register.component';
 import { AtualizarAdminComponent } from './admin-profile/atualizar-admin/atualizar-admin.component';
+import { RelatorioReceitasComponent } from './admin-profile/relatorio-receitas/relatorio-receitas.component';
+import { RelatorioClientesComponent } from './admin-profile/relatorio-clientes/relatorio-clientes.component';
+import { RelatorioClientesFieisComponent } from './admin-profile/relatorio-clientes-fieis/relatorio-clientes-fieis.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' }, // Rota padrão
@@ -24,7 +27,10 @@ const routes: Routes = [
   { path: 'inserir_item', component: InserirItemComponent},
   { path: 'atualizar-item/:id', component: AtualizarItemComponent },
   { path: 'register_func', component: AdminProfileRegisterComponent },
-  { path: 'atualizar-admin/:id', component: AtualizarAdminComponent }
+  { path: 'atualizar-admin/:id', component: AtualizarAdminComponent },
+  { path: 'gerar-relatorio-receitas', component: RelatorioReceitasComponent },
+  { path: 'gerar-relatorio-clientes', component: RelatorioClientesComponent },
+  { path: 'gerar-relatorio-clientes-fieis', component: RelatorioClientesFieisComponent }
 ];
 
 @NgModule({

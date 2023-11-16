@@ -139,4 +139,16 @@ export class HomeComponent {
     this.router.navigate(['/atualizar-admin', itemId]);
   }
 
+  gerarRelatorioReceitas(){
+    this.router.navigate(['/gerar-relatorio-receitas']);
+  }
+
+  gerarRelatorioClientes(){
+    this.router.navigate(['gerar-relatorio-clientes'])
+  }
+
+  gerarRelatorioClientesFieis(){
+    this.router.navigate(['gerar-relatorio-clientes-fieis'])
+  }
+
 }

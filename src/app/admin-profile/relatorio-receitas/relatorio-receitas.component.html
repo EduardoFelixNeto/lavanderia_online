@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu"
+            class="area-logada__sidebar funcionario col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse">
+
+        </nav>
+        <main>
+            <!-- Filtros -->
+            <div class="filters">
+                <label>Data Inicial:</label>
+                <input type="date" [(ngModel)]="dataInicial">
+
+                <label>Data Final:</label>
+                <input type="date" [(ngModel)]="dataFinal">
+
+            </div>
+
+            <!-- Visualização -->
+            <div class="table-container">
+                <table *ngIf="receitas && receitas.length">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Receita</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of receitas">
+                            <td>{{ item.data }}</td>
+                            <td>{{ item.valor | currency }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Exportação -->
+            <div class="pdf">
+                <button (click)="gerarRelatorio()">Gerar Relatório</button>
+                <button class="final-pdf" (click)="gerarPDF()">Gerar PDF</button>
+                <button (click)="goBack()">Sair</button>
+            </div>
+        </main>

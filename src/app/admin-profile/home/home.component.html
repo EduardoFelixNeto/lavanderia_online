@@ -66,6 +66,12 @@
         class="btn btn-primary">Inserir Item</button>
     <button style="display: inline; margin: 1%;" (click)="onRegister(); $event.preventDefault()"
         class="btn btn-primary">Cadastrar Funcionário</button>
+    <button style="display: inline; margin: 1%;" (click)="gerarRelatorioReceitas(); $event.preventDefault()"
+        class="btn btn-primary">Relatório de Receitas</button>
+    <button style="display: inline; margin: 1%;" (click)="gerarRelatorioClientes(); $event.preventDefault()"
+        class="btn btn-primary">Relatório de Clientes</button>
+        <button style="display: inline; margin: 1%;" (click)="gerarRelatorioClientesFieis(); $event.preventDefault()"
+        class="btn btn-primary">Relatório de Clientes Fiéis</button>
     <button style="display: inline; margin: 1%;" (click)="returnLoginPage(); $event.preventDefault()"
         class="btn btn-primary">Sair</button>
     <button style="display: inline; margin: 1%;" (click)="removeUser(); $event.preventDefault()"

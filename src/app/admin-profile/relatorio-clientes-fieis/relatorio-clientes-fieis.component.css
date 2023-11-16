@@ -1,0 +1,55 @@
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+    font-family: arial, sans-serif;
+  }
+  
+  td,
+  th {
+    border: 1px solid #000;
+    text-align: center;
+    vertical-align: middle;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+
+  button {
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+  .relatorio-clientes {
+    margin: 0 15px;
+    text-align: right;
+  }
+
+  .topnav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 50px;
+  
+  }
+
+
+
+  

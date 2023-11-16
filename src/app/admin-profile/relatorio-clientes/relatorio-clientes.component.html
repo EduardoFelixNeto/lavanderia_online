@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<div class="container-fluid">
+    <div class="row">
+        <nav id="sidebarMenu"
+            class="area-logada__sidebar funcionario col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse">
+            <div class="position-sticky pt-3 sidebar-sticky">
+
+            </div>
+        </nav>
+        <main>
+
+            <body>
+                <title>Relatório Clientes</title>
+                <div>
+                    <div class="topnav">
+                        <h1 class="d-flex justify-content-center">Relatório de Clientes da Lavanderia</h1>
+                    </div>
+                    <table class="table table bordered table-hover clientes">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>E-mail</th>
+                                <th>Endereço</th>
+                                <th>Telefone</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let cliente of clientesFicticios">
+                                <td>{{ cliente.nome }}</td>
+                                <td>{{ cliente.cpf }}</td>
+                                <td>{{ cliente.email }}</td>
+                                <td>{{ cliente.endereco }}</td>
+                                <td>{{ cliente.telefone }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="relatorio-clientes">
+                    <button (click)="gerarPDF()">Gerar relatório de clientes</button>
+                    <button (click)="goBack()">Sair</button>
+                </div>
+
+            </body>
+        </main>
