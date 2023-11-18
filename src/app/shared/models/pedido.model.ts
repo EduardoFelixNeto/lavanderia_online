@@ -5,4 +5,5 @@ export class Pedido {
     term?: number;
     amount?: number;
     isPaid?: Boolean;
+    transactionDate?: Date;
 }

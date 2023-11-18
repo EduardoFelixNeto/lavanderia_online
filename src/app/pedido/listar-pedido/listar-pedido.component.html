@@ -32,6 +32,7 @@
                 <th>Status</th>
                 <th>Prazo</th>
                 <th>Valor</th>
+                <th>Data</th>
                 <th class="text-center" *ngIf="currentUser!.profile == 'user'">
                     <button (click)="novoPedido(); $event.preventDefault()" href="#" title="Novo" alt="Novo"
                         class="btn btn-xs btn-success">
@@ -54,6 +55,7 @@
                 }">{{pedido.status}}</td>
                 <td>{{pedido.term}}</td>
                 <td>{{pedido.amount}}</td>
+                <td>{{pedido.transactionDate}}</td>
                 <td class="text-center" style="width: 450px">
                     <button (click)="abrirModalPedido(pedido); $event.preventDefault()" style="display: inline; margin: 1%;"
                         href="#" title="Ver" alt="Ver" class="btn btn-primary"><i class="fa fa-eye"

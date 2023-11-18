@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
 
@@ -7,7 +7,7 @@ import jsPDF from 'jspdf';
   templateUrl: './relatorio-clientes.component.html',
   styleUrls: ['./relatorio-clientes.component.css']
 })
-export class RelatorioClientesComponent {
+export class RelatorioClientesComponent implements OnInit {
 
   clientesFicticios = [
     { nome: 'João', cpf: '123456789-06', email: 'joao@gmail.com', endereco: 'Rua A, 123', telefone: '41 99999-9999' },

@@ -62,3 +62,19 @@ button:hover {
 input {
     padding: 0;
 }
+
+.date-input::-webkit-calendar-picker-indicator {
+    filter: invert(0.5); /* Inverte as cores do ícone do calendário */
+}
+
+.date-input::-webkit-datetime-edit { /* Estiliza o texto dentro do input */
+    font-size: 1rem;
+    color: #495057;
+}
+
+.date-input {
+    padding: .375rem .75rem; /* Padding padrão do Bootstrap */
+    border-radius: .25rem; /* Borda arredondada padrão do Bootstrap */
+    border: 1px solid #ced4da; /* Borda padrão do Bootstrap */
+}
+

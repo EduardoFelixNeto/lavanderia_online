@@ -72,7 +72,8 @@ export class InserirPedidoComponent implements OnInit {
           status: "Em Aberto",
           term: maxTerm,
           amount: totalAmount,
-          isPaid: false
+          isPaid: false,
+          transactionDate: new Date()
         };
 
         // Primeiro, insira o pedido

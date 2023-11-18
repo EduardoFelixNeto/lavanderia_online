@@ -1,8 +1,10 @@
 package br.com.felix.controllers;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -13,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import br.com.felix.model.RevenueReportDTO;
 import br.com.felix.model.Transaction;
 import br.com.felix.services.TransactionServices;
 
@@ -51,6 +55,13 @@ public class TransactionController {
 	        @PathVariable(value="status") String status) throws Exception{
 	    return service.findAllByStatus(status);
 	}
+	@GetMapping(value = "/revenueReport", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<RevenueReportDTO>> getRevenueReport(
+	        @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
+	        @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate) {
+	    List<RevenueReportDTO> revenueReport = service.calculateRevenue(startDate, endDate);
+	    return ResponseEntity.ok(revenueReport);
+	}
 	@PostMapping(
 			consumes=MediaType.APPLICATION_JSON_VALUE,
 			produces=MediaType.APPLICATION_JSON_VALUE)
@@ -71,5 +82,7 @@ public class TransactionController {
 		service.delete(id);
 		return ResponseEntity.noContent().build();	
 		}
+	
+	
 
 }

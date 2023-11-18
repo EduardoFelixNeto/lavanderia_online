@@ -1,5 +1,6 @@
 package br.com.felix.repositories;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,4 +19,6 @@ public interface TransactionRepository extends JpaRepository<Transaction,Long>{
 	List<Transaction> findByUserId(Integer userId);
 
 	List<Transaction> findAllByStatus(String status);
+
+	List<Transaction> findByTransactionDateBetween(LocalDate startDate, LocalDate endDate);
 }

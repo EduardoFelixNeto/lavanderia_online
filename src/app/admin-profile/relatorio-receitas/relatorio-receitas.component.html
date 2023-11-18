@@ -1,42 +1,54 @@
-<div class="container-fluid">
-    <div class="row">
-        <nav id="sidebarMenu"
-            class="area-logada__sidebar funcionario col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse">
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">Relatório de Receitas</h1>
+    </div>
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-8">
+            <form (ngSubmit)="gerarRelatorio()" class="form-inline justify-content-center">
+                <div class="form-group mr-2">
+                    <input style="display: inline; margin: 1%;" type="date" class="form-control date-input small-date-input" [(ngModel)]="dataInicial" name="startDate"
+                        placeholder="Data Inicial">
+                </div>
+                <div class="form-group mr-2">
+                    <input style="display: inline; margin: 1%;" type="date" class="form-control date-input small-date-input" [(ngModel)]="dataFinal" name="endDate"
+                        placeholder="Data Final">
+                </div>
+                <div class="text-center">
+                <button style="display: inline; margin: 1%;" type="submit" class="btn btn-outline-primary btn-lg"><i class="fas fa-chart-line"></i> Gerar
+                    Relatório</button>
+                <button style="display: inline; margin: 1%;" (click)="gerarPDF(); $event.preventDefault()"
+                    class="btn btn-outline-primary btn-lg">
+                    <i class="fa fa-file-pdf-o"></i> Exportar como PDF
+                </button>
+                <button style="display: inline; margin: 1%;" (click)="goBack(); $event.preventDefault()"
+                    class="btn btn-outline-primary btn-lg">
+                    <i class="fa fa-arrow-left"></i> Voltar
+                </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" *ngIf="reportData && reportData.length">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Data</th>
+                    <th>Receita Total do Dia</th>
+                    <th>Quantidade de Pedidos no Dia</th>
+                    <th>Média de Receita por Pedido</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let data of reportData">
+                    <td>{{ data.date }}</td>
+                    <td>{{ data.totalRevenue | number:'1.2-2' }}</td>
+                    <td>{{ data.ordersCount }}</td>
+                    <td>{{ data.averageOrderValue | number:'1.2-2' }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center mt-3">
 
-        </nav>
-        <main>
-            <!-- Filtros -->
-            <div class="filters">
-                <label>Data Inicial:</label>
-                <input type="date" [(ngModel)]="dataInicial">
-
-                <label>Data Final:</label>
-                <input type="date" [(ngModel)]="dataFinal">
-
-            </div>
-
-            <!-- Visualização -->
-            <div class="table-container">
-                <table *ngIf="receitas && receitas.length">
-                    <thead>
-                        <tr>
-                            <th>Data</th>
-                            <th>Receita</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let item of receitas">
-                            <td>{{ item.data }}</td>
-                            <td>{{ item.valor | currency }}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Exportação -->
-            <div class="pdf">
-                <button (click)="gerarRelatorio()">Gerar Relatório</button>
-                <button class="final-pdf" (click)="gerarPDF()">Gerar PDF</button>
-                <button (click)="goBack()">Sair</button>
-            </div>
-        </main>
+    </div>
+</div>

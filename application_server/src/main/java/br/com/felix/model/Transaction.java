@@ -1,5 +1,6 @@
 package br.com.felix.model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import jakarta.persistence.Column;
@@ -31,6 +32,9 @@ public class Transaction {
 	
 	@Column(name = "isPaid", nullable=false, length = 20)
 	private Boolean isPaid;
+	
+	@Column(name = "transactionDate", nullable=false, length = 20)
+	private LocalDate transactionDate;
 
 	public Transaction() {}
 
@@ -81,10 +85,20 @@ public class Transaction {
 	public void setIsPaid(Boolean isPaid) {
 		this.isPaid = isPaid;
 	}
+	
+	
+
+	public LocalDate getTransactionDate() {
+		return transactionDate;
+	}
+
+	public void setTransactionDate(LocalDate localDate) {
+		this.transactionDate = localDate;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(amount, id, isPaid, status, term, userId);
+		return Objects.hash(amount, id, isPaid, status, term, transactionDate, userId);
 	}
 
 	@Override
@@ -98,7 +112,7 @@ public class Transaction {
 		Transaction other = (Transaction) obj;
 		return Objects.equals(amount, other.amount) && id == other.id && Objects.equals(isPaid, other.isPaid)
 				&& Objects.equals(status, other.status) && Objects.equals(term, other.term)
-				&& Objects.equals(userId, other.userId);
+				&& Objects.equals(transactionDate, other.transactionDate) && Objects.equals(userId, other.userId);
 	}
 	
 	
