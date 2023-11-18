@@ -34,12 +34,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let cliente of clientesFicticios">
-                                <td>{{ cliente.nome }}</td>
+                            <tr *ngFor="let cliente of clientes">
+                                <td>{{ cliente.name }}</td>
                                 <td>{{ cliente.cpf }}</td>
                                 <td>{{ cliente.email }}</td>
-                                <td>{{ cliente.endereco }}</td>
-                                <td>{{ cliente.telefone }}</td>
+                                <td>{{ cliente.address }}</td>
+                                <td>{{ cliente.phone }}</td>
                             </tr>
                         </tbody>
                     </table>
