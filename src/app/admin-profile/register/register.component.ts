@@ -32,7 +32,7 @@ export class RegisterComponent {
       const newUser: User = {
         id: maxId + 1,
         email: this.user.email,
-        password: this.user.password,
+        password: '',
         profile: 'admin',
         cpf: this.user.cpf,
         name: this.user.name,

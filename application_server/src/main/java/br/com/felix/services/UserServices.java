@@ -55,6 +55,11 @@ public class UserServices {
 		var entity = repository.findById(user.getId())
 				.orElseThrow(() -> new ResourceNotFoundException("No records found for this ID!"));
 		
+		String salt = PasswordUtils.getSalt();
+	    user.setSalt(salt);
+	    user.setPassword(PasswordUtils.generateHash(user.getPassword(), salt));
+		
+		
 		entity.setEmail(user.getEmail());
 		entity.setPassword(user.getPassword());
 		entity.setProfile(user.getProfile());
