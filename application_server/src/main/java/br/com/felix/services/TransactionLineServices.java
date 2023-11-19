@@ -44,6 +44,7 @@ public class TransactionLineServices {
 		entity.setQuantity(transactionLine.getQuantity());
 		entity.setTerm(transactionLine.getTerm());
 		entity.setTotalAmount(transactionLine.getTotalAmount());
+		entity.setItemName(transactionLine.getItemName());
 		
 		return repository.save(transactionLine);
 	}

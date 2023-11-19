@@ -41,7 +41,7 @@ export class InserirPedidoComponent implements OnInit {
     this.pedidoService.getLastTransactionLineId().subscribe(lastLineId => {
       const newLineId = lastLineId + 1;
       const userId = this.currentUser!.id;
-      const linha = new LinhaPedido(0, userId!, item.id!, quantidade);  // Pedido ID será definido depois
+      const linha = new LinhaPedido(0, userId!, item.id!, item.name!, quantidade);  // Pedido ID será definido depois
       // Defina o ID da linha de pedido
       linha.id = newLineId;
       linha.totalAmount = item.amount! * quantidade;
@@ -123,8 +123,9 @@ export class InserirPedidoComponent implements OnInit {
           userId: userId,
           status: "Rejeitado",
           term: maxTerm,
-          amount: totalAmount,
-          isPaid: false
+          amount: 0,
+          isPaid: false,
+          transactionDate: new Date()
         };
         this.pedidoService.createTransaction(newPedido).subscribe(() => {
           this.router.navigate(['/user_homepage']);

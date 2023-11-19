@@ -39,6 +39,7 @@ export class ModalPagarPedidoComponent {
     // Atualiza o status do pedido para "Cancelado" (ou outro status apropriado)
     pedido.status = 'Pago';
     pedido.isPaid = true;
+    pedido.transactionDate = new Date();
 
     // Envia a atualização para o servidor
     this.pedidoService.updatePedido(pedido).subscribe({

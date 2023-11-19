@@ -26,6 +26,9 @@ public class TransactionLine {
 	@Column(name = "itemId", nullable=false, length = 10)
 	private Integer itemId;
 	
+	@Column(name = "itemName", nullable=false, length = 50)
+	private String itemName;
+	
 	@Column(name = "quantity", nullable=false, length = 10)
 	private Integer quantity;
 	
@@ -92,10 +95,18 @@ public class TransactionLine {
 	public void setTotalAmount(Double totalAmount) {
 		this.totalAmount = totalAmount;
 	}
+	
+	public String getItemName() {
+		return itemName;
+	}
+
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, itemId, quantity, term, totalAmount, transactionId, userId);
+		return Objects.hash(id, itemId, itemName, quantity, term, totalAmount, transactionId, userId);
 	}
 
 	@Override
@@ -107,9 +118,10 @@ public class TransactionLine {
 		if (getClass() != obj.getClass())
 			return false;
 		TransactionLine other = (TransactionLine) obj;
-		return id == other.id && Objects.equals(itemId, other.itemId) && Objects.equals(quantity, other.quantity)
-				&& Objects.equals(term, other.term) && Objects.equals(totalAmount, other.totalAmount)
-				&& Objects.equals(transactionId, other.transactionId) && Objects.equals(userId, other.userId);
+		return id == other.id && Objects.equals(itemId, other.itemId) && Objects.equals(itemName, other.itemName)
+				&& Objects.equals(quantity, other.quantity) && Objects.equals(term, other.term)
+				&& Objects.equals(totalAmount, other.totalAmount) && Objects.equals(transactionId, other.transactionId)
+				&& Objects.equals(userId, other.userId);
 	}
 
 
