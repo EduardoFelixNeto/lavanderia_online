@@ -33,6 +33,8 @@ public class User implements Serializable {
 	private String address;
 	@Column(name = "phone", nullable=false, length = 20)
 	private String phone;
+	@Column (name = "salt", nullable=false, length = 300)
+	private String salt;
 	
 
 	public User() {}
@@ -101,10 +103,20 @@ public class User implements Serializable {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
+	
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
+	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, cpf, email, id, name, password, phone, profile);
+		return Objects.hash(address, cpf, email, id, name, password, phone, profile, salt);
 	}
 
 	@Override
@@ -119,7 +131,7 @@ public class User implements Serializable {
 		return Objects.equals(address, other.address) && Objects.equals(cpf, other.cpf)
 				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
 				&& Objects.equals(password, other.password) && Objects.equals(phone, other.phone)
-				&& Objects.equals(profile, other.profile);
+				&& Objects.equals(profile, other.profile) && Objects.equals(salt, other.salt);
 	}
 	
 	

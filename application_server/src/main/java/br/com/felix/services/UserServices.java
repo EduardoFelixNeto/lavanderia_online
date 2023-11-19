@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.felix.exceptions.ResourceNotFoundException;
 import br.com.felix.model.User;
 import br.com.felix.repositories.UserRepository;
+import br.com.felix.utils.PasswordUtils;
 
 @Service
 public class UserServices {
@@ -33,7 +34,15 @@ public class UserServices {
 		String randomPassword = generateRandomPassword();
 	    user.setPassword(randomPassword);
 	    emailService.sendSimpleMessage(user.getEmail(), "Bem-vindo ao LOL", "Sua senha é: " + randomPassword);
+	    String salt = PasswordUtils.getSalt();
+	    user.setSalt(salt);
+	    user.setPassword(PasswordUtils.generateHash(user.getPassword(), salt));
 		return repository.save(user);
+	}
+	
+	public boolean checkPassword(User user, String password) {
+	    String hashedPassword = PasswordUtils.generateHash(password, user.getSalt());
+	    return hashedPassword.equals(user.getPassword());
 	}
 	
 	private String generateRandomPassword() {

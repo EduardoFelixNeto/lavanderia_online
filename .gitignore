@@ -40,3 +40,7 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+
+# Credentials
+
+application_server/src/main/resources/application.yml

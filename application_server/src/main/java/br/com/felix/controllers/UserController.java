@@ -71,9 +71,8 @@ public class UserController {
 	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("User not found");
 	    }
 
-	    // Como mencionado anteriormente, é uma verificação simplificada.
-	    // Em um cenário real, hash a senha e compare com a senha armazenada.
-	    if (!user.getPassword().equals(loginRequest.password)) {
+	    // Verifique a senha usando o método checkPassword
+	    if (!service.checkPassword(user, loginRequest.password)) {
 	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid password");
 	    }
 
