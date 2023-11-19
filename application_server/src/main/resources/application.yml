@@ -1,9 +1,9 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/application_server?useTimezone=true&serverTimezone=UTC
+    url: jdbc:mysql:${CREDENTIALS}
     username: root
-    password: N&71_h0095
+    password: ${DB_PWD}
   jpa:
     hibernate:
       ddl-auto: update
@@ -14,8 +14,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: cadesignplus@gmail.com
-    password: jjsrttskajwpjdpt
+    username: ${GMAIL}
+    password: ${GMAIL_PWD}
     properties.mail.smtp:
       auth: true
       starttls.enable: true
