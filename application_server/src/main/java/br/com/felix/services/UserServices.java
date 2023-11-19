@@ -1,6 +1,7 @@
 package br.com.felix.services;
 
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class UserServices {
 	@Autowired
 	UserRepository repository;
 	
+	@Autowired
+    private EmailService emailService;
+	
 	public List<User> findAll() {
 		return repository.findAll();
 	}
@@ -26,8 +30,15 @@ public class UserServices {
 	}
 	
 	public User create(User user) {
-		
+		String randomPassword = generateRandomPassword();
+	    user.setPassword(randomPassword);
+	    emailService.sendSimpleMessage(user.getEmail(), "Bem-vindo ao LOL", "Sua senha é: " + randomPassword);
 		return repository.save(user);
+	}
+	
+	private String generateRandomPassword() {
+	    // Implemente seu gerador de senha
+	    return String.valueOf(new Random().nextInt(8999) + 1000); // Senha de 4 dígitos
 	}
 	
 	public User update(User user) {

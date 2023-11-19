@@ -11,3 +11,11 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
     show-sql: false
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: cadesignplus@gmail.com
+    password: jjsrttskajwpjdpt
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
