@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
+import { combineLatest, map } from 'rxjs';
+import { AuthenticationService } from 'src/app/login/services/authentication.service';
+import { PedidoService } from 'src/app/pedido/services/pedido.service';
+import { User } from 'src/app/shared/models/user.model';
 
 @Component({
   selector: 'app-relatorio-clientes-fieis',
@@ -8,15 +12,49 @@ import jsPDF from 'jspdf';
   styleUrls: ['./relatorio-clientes-fieis.component.css']
 })
 export class RelatorioClientesFieisComponent implements OnInit {
-  clientesFicticios = [
-    { nome: 'João', cpf: '123456789-06', email: 'joao@gmail.com', endereco: 'Rua A, 123', telefone: '41 99999-9999', qtd: '10', total: 'R$ 640,00' },
-    { nome: 'Joaquina', cpf: '333456789-91', email: 'joaquina@gmail.com', endereco: 'Rua Caneta azul, 234', telefone: '11 99999-9999', qtd: '8', total: 'R$ 463,00' },
-    { nome: 'Joana', cpf: '444678987-10', email: 'joana@gmail.com', endereco: 'Rua dos POmbos, 456', telefone: '44 99999-9999', qtd: '5', total: 'R$ 450,00' }
-  ];
+  clientesFieis: Array<User & { totalOrders: number; totalRevenue: number }> = [];
 
-  constructor(private router : Router) { }
+  constructor(
+    private userService: AuthenticationService,
+    private pedidoService: PedidoService,
+    private router: Router
+  ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.loadLoyalCustomers();
+  }
+
+  loadLoyalCustomers(): void {
+    this.userService.getUsersByProfile('user').subscribe(
+      (users) => {
+        // Filtre aqui os usuários que são clientes (isso depende do seu modelo de dados)
+        const customers = users.filter(user => user.profile === 'user');
+
+        // Para cada usuário, obtenha os pedidos e calcule os totais
+        const customersWithTotals = customers.map(customer => {
+          return this.pedidoService.listByUserId(customer.id!).pipe(
+            map(pedidos => {
+              const totalOrders = pedidos.length;
+              const totalRevenue = pedidos.reduce((sum, pedido) => sum + pedido.amount!, 0);
+              return { ...customer, totalOrders, totalRevenue };
+            })
+          );
+        });
+
+        // Combine todos os Observables em um único Observable
+        combineLatest(customersWithTotals).subscribe(customerTotals => {
+          // Aqui você tem a lista de clientes com a quantidade de pedidos e receita total
+          // Agora você pode ordenar e pegar os três principais
+          this.clientesFieis = customerTotals
+            .sort((a, b) => b.totalRevenue - a.totalRevenue) // Ordenar por receita total
+            .slice(0, 3); // Pegar os três principais
+        });
+      },
+      (error) => {
+        console.error('Erro ao buscar clientes', error);
+      }
+    );
+  }
 
   gerarPDF(): void {
     const documento = new jsPDF();
@@ -26,21 +64,21 @@ export class RelatorioClientesFieisComponent implements OnInit {
     documento.text('Relatório de Clientes Fiéis da Lavanderia', 10, yOffset);
     yOffset += 10;
 
-    this.clientesFicticios.forEach((cliente) => {
+    this.clientesFieis.forEach((cliente) => {
       documento.setFontSize(10);
-      documento.text(`Nome: ${cliente.nome}`, 10, yOffset);
+      documento.text(`Nome: ${cliente.name}`, 10, yOffset);
       yOffset += 10;
       documento.text(`CPF: ${cliente.cpf}`, 10, yOffset);
       yOffset += 10;
       documento.text(`E-mail: ${cliente.email}`, 10, yOffset);
       yOffset += 10;
-      documento.text(`Endereço: ${cliente.endereco}`, 10, yOffset);
+      documento.text(`Endereço: ${cliente.address}`, 10, yOffset);
       yOffset += 10;
-      documento.text(`Telefone: ${cliente.telefone}`, 10, yOffset);
+      documento.text(`Telefone: ${cliente.phone}`, 10, yOffset);
       yOffset += 15;
-      documento.text(`Endereço: ${cliente.qtd}`, 10, yOffset);
+      documento.text(`Endereço: ${cliente.totalOrders}`, 10, yOffset);
       yOffset += 5;
-      documento.text(`Telefone: ${cliente.total}`, 10, yOffset);
+      documento.text(`Telefone: ${cliente.totalRevenue}`, 10, yOffset);
       yOffset += 10; // Espaço entre os detalhes do cliente// Espaço entre os detalhes do cliente
     });
 
