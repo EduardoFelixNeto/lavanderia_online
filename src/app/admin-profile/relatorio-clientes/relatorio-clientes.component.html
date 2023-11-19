@@ -1,54 +1,43 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-</head>
-
-<div class="container-fluid">
-    <div class="row">
-        <nav id="sidebarMenu"
-            class="area-logada__sidebar funcionario col-md-3 col-lg-2 d-md-block bg-body-tertiary sidebar collapse">
-            <div class="position-sticky pt-3 sidebar-sticky">
-
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h1 class="display-4">Relatório de Clientes</h1>
+    </div>
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-8">
+            <div class="text-center">
+                <button style="display: inline; margin: 1%;" (click)="gerarPDF(); $event.preventDefault()" class="btn btn-outline-primary btn-lg"><i
+                        class="fas fa-chart-line"></i> Gerar
+                    PDF</button>
+                <button style="display: inline; margin: 1%;" (click)="goBack(); $event.preventDefault()"
+                    class="btn btn-outline-primary btn-lg">
+                    <i class="fa fa-arrow-left"></i> Voltar
+                </button>
             </div>
-        </nav>
-        <main>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover" *ngIf="clientes && clientes.length">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>E-mail</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cliente of clientes">
+                    <td>{{ cliente.name }}</td>
+                    <td>{{ cliente.cpf }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.address }}</td>
+                    <td>{{ cliente.phone }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="text-center mt-3">
 
-            <body>
-                <title>Relatório Clientes</title>
-                <div>
-                    <div class="topnav">
-                        <h1 class="d-flex justify-content-center">Relatório de Clientes da Lavanderia</h1>
-                    </div>
-                    <table class="table table bordered table-hover clientes">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>Nome</th>
-                                <th>CPF</th>
-                                <th>E-mail</th>
-                                <th>Endereço</th>
-                                <th>Telefone</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr *ngFor="let cliente of clientes">
-                                <td>{{ cliente.name }}</td>
-                                <td>{{ cliente.cpf }}</td>
-                                <td>{{ cliente.email }}</td>
-                                <td>{{ cliente.address }}</td>
-                                <td>{{ cliente.phone }}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="relatorio-clientes">
-                    <button (click)="gerarPDF()">Gerar relatório de clientes</button>
-                    <button (click)="goBack()">Sair</button>
-                </div>
-
-            </body>
-        </main>
+    </div>
+</div>

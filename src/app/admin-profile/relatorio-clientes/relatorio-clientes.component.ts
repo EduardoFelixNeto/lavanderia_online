@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import jsPDF from 'jspdf';
+import { AuthenticationService } from 'src/app/login/services/authentication.service';
 import { User } from 'src/app/shared/models/user.model';
 
 @Component({
@@ -12,9 +13,22 @@ export class RelatorioClientesComponent implements OnInit {
 
   clientes: User[] = []
 
-  constructor(private router : Router){}
+  constructor(private userService: AuthenticationService, private router : Router){}
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.loadUsers();
+  }
+
+  loadUsers(): void {
+    this.userService.getUsersByProfile('user').subscribe(
+      (users) => {
+        this.clientes = users;
+      },
+      (error) => {
+        console.error('Erro ao buscar clientes', error);
+      }
+    );
+  }
 
   gerarPDF(): void {
     const documento = new jsPDF();

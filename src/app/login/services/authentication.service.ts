@@ -50,4 +50,9 @@ export class AuthenticationService {
     return this.http.delete<void>(`${this.apiUrl}user/${id}`);
   }
 
+  getUsersByProfile(profile: string): Observable<User[]> {
+    return this.http.get<User[]>(`${this.apiUrl}user/profile/${profile}`, {
+    });
+  }
+
 }
