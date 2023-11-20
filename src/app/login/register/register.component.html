@@ -13,7 +13,7 @@
         <label for="cpf" class="form-label">CPF:</label>
         <div class="input-group">
           <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
-          <input type="text" class="form-control" id="cpf" [(ngModel)]="user.cpf" name="cpf" required>
+          <input type="text" appCpfMask class="form-control" id="cpf" [(ngModel)]="user.cpf" name="cpf" required>
         </div>
       </div>
 
@@ -37,7 +37,7 @@
         <label for="phone" class="form-label">Telefone:</label>
         <div class="input-group">
           <span class="input-group-text"><i class="fa fa-phone"></i></span>
-          <input type="phone" class="form-control" id="phone" [(ngModel)]="user.phone" name="phone" required>
+          <input type="text" appPhoneMask class="form-control" id="phone" [(ngModel)]="user.phone" name="phone" required>
         </div>
       </div>
   

@@ -7,7 +7,8 @@ import { AtualizarAdminComponent } from './atualizar-admin/atualizar-admin.compo
 import { RelatorioReceitasComponent } from './relatorio-receitas/relatorio-receitas.component';
 import { RelatorioClientesFieisComponent } from './relatorio-clientes-fieis/relatorio-clientes-fieis.component';
 import { RelatorioClientesComponent } from './relatorio-clientes/relatorio-clientes.component';
-
+import { CpfMas2kDirective } from '../shared/directives/cpf-mask2.directive';
+import { PhoneMask2Directive } from '../shared/directives/phone-mask2.directive';
 
 
 @NgModule({
@@ -17,7 +18,9 @@ import { RelatorioClientesComponent } from './relatorio-clientes/relatorio-clien
     AtualizarAdminComponent,
     RelatorioReceitasComponent,
     RelatorioClientesFieisComponent,
-    RelatorioClientesComponent
+    RelatorioClientesComponent,
+    CpfMas2kDirective,
+    PhoneMask2Directive
   ],
   imports: [
     CommonModule,
