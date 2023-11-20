@@ -29,6 +29,8 @@ public class User implements Serializable {
 	private String cpf;
 	@Column(name = "name", nullable=false, length = 100)
 	private String name;
+	@Column(name = "cep", nullable=false, length = 20)
+	private String cep;
 	@Column(name = "address", nullable=false, length = 200)
 	private String address;
 	@Column(name = "phone", nullable=false, length = 20)
@@ -106,6 +108,14 @@ public class User implements Serializable {
 	
 	
 
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
 	public String getSalt() {
 		return salt;
 	}
@@ -116,7 +126,7 @@ public class User implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, cpf, email, id, name, password, phone, profile, salt);
+		return Objects.hash(address, cep, cpf, email, id, name, password, phone, profile, salt);
 	}
 
 	@Override
@@ -128,10 +138,11 @@ public class User implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return Objects.equals(address, other.address) && Objects.equals(cpf, other.cpf)
-				&& Objects.equals(email, other.email) && id == other.id && Objects.equals(name, other.name)
-				&& Objects.equals(password, other.password) && Objects.equals(phone, other.phone)
-				&& Objects.equals(profile, other.profile) && Objects.equals(salt, other.salt);
+		return Objects.equals(address, other.address) && Objects.equals(cep, other.cep)
+				&& Objects.equals(cpf, other.cpf) && Objects.equals(email, other.email) && id == other.id
+				&& Objects.equals(name, other.name) && Objects.equals(password, other.password)
+				&& Objects.equals(phone, other.phone) && Objects.equals(profile, other.profile)
+				&& Objects.equals(salt, other.salt);
 	}
 	
 	

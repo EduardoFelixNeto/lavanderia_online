@@ -67,6 +67,7 @@ public class UserServices {
 		entity.setName(user.getName());
 		entity.setAddress(user.getAddress());
 		entity.setPhone(user.getPhone());
+		entity.setCep(user.getCep());
 		
 		return repository.save(user);
 	}

@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from 'src/app/login/services/authentication.service';
@@ -17,7 +18,7 @@ export class RegisterComponent {
   message!: string;
 
 
-  constructor(private authService: AuthenticationService, private router: Router) { } // Injete o serviço aqui
+  constructor(private authService: AuthenticationService, private router: Router, private http: HttpClient) { } // Injete o serviço aqui
 
   onSubmit(): void {
     // Primeiro, verificamos se o usuário já está registrado
@@ -48,5 +49,18 @@ export class RegisterComponent {
 
   returnToAdminPage(): void {
     this.router.navigate(['/admin_homepage']); // 3. Use o método navigate
+  }
+
+  buscarCep() {
+    if (this.user.cep && this.user.cep.length == 8) {
+      this.http.get(`https://viacep.com.br/ws/${this.user.cep}/json/`).subscribe((endereco: any) => {
+        if (!endereco.erro) {
+          this.user.address = `${endereco.logradouro}, ${endereco.bairro}, ${endereco.localidade} - ${endereco.uf}`;
+        } else {
+          console.log('CEP Nao Encontrado')
+        }
+      }, () => {
+      });
+    }
   }
 }

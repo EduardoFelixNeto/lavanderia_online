@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { CpfMaskDirective } from '../shared/directives/cpf-mask.directive';
 import { PhoneMaskDirective } from '../shared/directives/phone-mask.directive';
+import { CepMaskDirective } from '../shared/directives/cep-mask.directive';
 
 
 @NgModule({
@@ -12,7 +13,9 @@ import { PhoneMaskDirective } from '../shared/directives/phone-mask.directive';
     LoginComponent,
     RegisterComponent,
     CpfMaskDirective,
-    PhoneMaskDirective
+    PhoneMaskDirective,
+    CepMaskDirective
+
   ],
   imports: [
     CommonModule,

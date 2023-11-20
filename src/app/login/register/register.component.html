@@ -1,50 +1,62 @@
 <div style="padding-left: 25%; padding-right: 25%;" class="container mt-5">
-    <h2>Autocadastro</h2>
-    <form (ngSubmit)="onSubmit()">
-      <div class="mb-3">
-        <label for="email" class="form-label">E-mail:</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-          <input type="email" class="form-control" id="email" [(ngModel)]="user.email" name="email" required>
+  <h2>Autocadastro</h2>
+  <form (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="email" class="form-label">E-mail:</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+        <input type="email" [(ngModel)]="user.email" name="email" #emailField="ngModel" required email>
+        <div *ngIf="emailField.errors && emailField.touched">
+          <p *ngIf="emailField.errors['required']">Email é obrigatório.</p>
+          <p *ngIf="emailField.errors['email']">Email inválido.</p>
         </div>
       </div>
+    </div>
 
-      <div class="mb-3">
-        <label for="cpf" class="form-label">CPF:</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
-          <input type="text" appCpfMask class="form-control" id="cpf" [(ngModel)]="user.cpf" name="cpf" required>
-        </div>
+    <div class="mb-3">
+      <label for="cpf" class="form-label">CPF:</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fa-solid fa-id-card"></i></span>
+        <input type="text" appCpfMask class="form-control" id="cpf" [(ngModel)]="user.cpf" name="cpf" required>
       </div>
+    </div>
 
-      <div class="mb-3">
-        <label for="name" class="form-label">Nome:</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="fas fa-user"></i></span>
-          <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name" required>
-        </div>
+    <div class="mb-3">
+      <label for="name" class="form-label">Nome:</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-user"></i></span>
+        <input type="text" class="form-control" id="name" [(ngModel)]="user.name" name="name" required>
       </div>
+    </div>
 
-      <div class="mb-3">
-        <label for="address" class="form-label">Endereço:</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="fa-solid fa-house-user"></i></span>
-          <input type="text" class="form-control" id="address" [(ngModel)]="user.address" name="address" required>
-        </div>
+    <div class="mb-3">
+      <label for="cep" class="form-label">CEP:</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+        <input type="text" class="form-control" id="cep" [(ngModel)]="user.cep" name="cep" required>
+        <button (click)="buscarCep(); $event.preventDefault()" class="btn btn-primary">Buscar</button>
       </div>
+    </div>    
 
-      <div class="mb-3">
-        <label for="phone" class="form-label">Telefone:</label>
-        <div class="input-group">
-          <span class="input-group-text"><i class="fa fa-phone"></i></span>
-          <input type="text" appPhoneMask class="form-control" id="phone" [(ngModel)]="user.phone" name="phone" required>
-        </div>
+    <div class="mb-3">
+      <label for="address" class="form-label">Endereço:</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fa-solid fa-house-user"></i></span>
+        <input type="text" class="form-control" id="address" [(ngModel)]="user.address" name="address" required>
       </div>
-  
-      <button type="submit" class="btn btn-primary">Cadastrar</button>
-    </form>
-    <br>
-    <button (click)="returnLoginPage(); $event.preventDefault()" class="btn btn-primary">Sair</button>
-    <p *ngIf="message">{{ message }}</p>
-  </div>
-  
+    </div>
+
+    <div class="mb-3">
+      <label for="phone" class="form-label">Telefone:</label>
+      <div class="input-group">
+        <span class="input-group-text"><i class="fa fa-phone"></i></span>
+        <input type="text" appPhoneMask class="form-control" id="phone" [(ngModel)]="user.phone" name="phone" required>
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Cadastrar</button>
+  </form>
+  <br>
+  <button (click)="returnLoginPage(); $event.preventDefault()" class="btn btn-primary">Sair</button>
+  <p *ngIf="message">{{ message }}</p>
+</div>
